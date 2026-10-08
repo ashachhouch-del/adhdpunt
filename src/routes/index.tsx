@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CtaBand, CtaButton, Section, meta } from "@/components/site";
+
+export const WACHTTIJD_DAGEN = 30;
 
 export const Route = createFileRoute("/")({
   head: () => meta("ADHD-zorg voor volwassenen", "ADHD Care biedt zorgvuldige ADHD-diagnostiek en behandeling voor volwassenen. Meld je direct aan."),
@@ -12,6 +15,41 @@ const steps = [
   ["Diagnostiek", "Een zorgvuldig onderzoek met gesprekken en vragenlijsten."],
   ["Advies & behandeling", "Je krijgt een helder advies en, als het past, een behandeling op maat."],
 ];
+
+function WaitTimeCounter() {
+  const [days, setDays] = useState(0);
+
+  useEffect(() => {
+    const duration = 1200;
+    const start = performance.now();
+    let frame: number;
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDays(Math.round(eased * WACHTTIJD_DAGEN));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  return (
+    <section className="bg-primary text-primary-foreground">
+      <div className="mx-auto max-w-4xl px-4 py-14 text-center md:py-16">
+        <p className="text-sm font-bold uppercase tracking-widest text-primary-foreground/80">Onze wachttijd</p>
+        <div className="mt-4 flex items-baseline justify-center gap-3">
+          <span className="text-7xl font-extrabold leading-none tabular-nums md:text-8xl" aria-label={`${WACHTTIJD_DAGEN} dagen`}>
+            {days}
+          </span>
+          <span className="text-2xl font-bold md:text-3xl">dagen</span>
+        </div>
+        <p className="mx-auto mt-4 max-w-xl text-primary-foreground/90">
+          Dat is nu de wachttijd tussen je aanmelding en je intakegesprek. We werken hard om deze zo kort mogelijk te houden.
+        </p>
+      </div>
+    </section>
+  );
+}
 
 function Index() {
   return (
@@ -34,6 +72,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <WaitTimeCounter />
 
       <Section title="Wat we voor je doen">
         <div className="grid gap-4 md:grid-cols-3">
