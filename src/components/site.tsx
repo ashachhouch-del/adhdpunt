@@ -16,8 +16,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to="/" className="text-lg font-extrabold text-primary">
-          ADHD<span className="text-secondary"> Punt</span>
+        <Link to="/" aria-label="ADHD Care home">
+          <Logo />
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-medium lg:flex">
           {nav.map((n) => (
@@ -76,7 +76,7 @@ export function Footer() {
     <footer className="mt-20 bg-primary pb-24 text-primary-foreground md:pb-0">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
         <div>
-          <p className="text-lg font-extrabold">ADHD Care</p>
+          <Logo inverse />
           <p className="mt-2 text-sm opacity-80">Specialistische ADHD-zorg voor volwassenen.</p>
         </div>
         <div className="text-sm">
@@ -152,4 +152,20 @@ export function meta(title: string, description: string) {
       { name: "twitter:card", content: "summary" },
     ],
   };
+}
+
+export function Logo({ inverse }: { inverse?: boolean }) {
+  return (
+    <span className={`inline-flex items-center gap-2 ${inverse ? "text-primary-foreground" : "text-primary"}`}>
+      <svg viewBox="0 0 64 34" className="h-8 w-auto" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M14 10 L22 10 L26 17 L22 24 L14 24 L10 17 Z" />
+        <path d="M17 15 L19 15 M16 20 L20 20" strokeWidth="2.5" />
+        <path d="M14 10 L11 3 M10 17 L3 17 M26 17 L34 23 L42 19 L50 23" />
+        <circle cx="55" cy="25" r="5" fill="var(--accent)" stroke="none" />
+      </svg>
+      <span className="text-xl font-extrabold tracking-tight">
+        ADHD <span className="font-semibold">Care</span>
+      </span>
+    </span>
+  );
 }
