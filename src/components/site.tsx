@@ -76,7 +76,7 @@ export function Footer() {
     <footer className="mt-20 bg-primary pb-24 text-primary-foreground md:pb-0">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
         <div>
-          <p className="text-lg font-extrabold">ADHD Punt</p>
+          <p className="text-lg font-extrabold">ADHD Care</p>
           <p className="mt-2 text-sm opacity-80">Specialistische ADHD-zorg voor volwassenen.</p>
         </div>
         <div className="text-sm">
@@ -141,7 +141,7 @@ export function CtaBand() {
 }
 
 export function meta(title: string, description: string) {
-  const t = `${title} | ADHD Punt`;
+  const t = `${title} | ADHD Care`;
   return {
     meta: [
       { title: t },
