@@ -11,12 +11,12 @@ const field = "mt-1 w-full rounded-lg border border-input px-4 py-3";
 
 function Page() {
   const navigate = useNavigate();
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<{ naam?: string; email?: string; akkoord?: string }>({});
 
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const d = new FormData(e.currentTarget);
-    const n: Record<string, string> = {};
+    const n: { naam?: string; email?: string; akkoord?: string } = {};
     if (!String(d.get("naam") || "").trim()) n.naam = "Vul je naam in.";
     if (!/^\S+@\S+\.\S+$/.test(String(d.get("email") || ""))) n.email = "Vul een geldig e-mailadres in.";
     if (!d.get("akkoord")) n.akkoord = "Geef toestemming om verder te gaan.";
