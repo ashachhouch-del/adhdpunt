@@ -73,6 +73,8 @@ function Index() {
         </div>
       </section>
 
+      <WaitTimeCounter />
+
       <Section title="Wat we voor je doen">
         <div className="grid gap-4 md:grid-cols-3">
           <Card title="Diagnostiek">Een grondig onderzoek naar ADHD, met aandacht voor wat er nog meer kan spelen.</Card>
