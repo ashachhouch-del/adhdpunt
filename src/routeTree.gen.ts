@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AanmeldenRouteImport } from './routes/aanmelden'
+import { Route as AdhdBehandelingRouteImport } from './routes/adhd-behandeling'
+import { Route as AdhdDiagnostiekRouteImport } from './routes/adhd-diagnostiek'
+import { Route as BedanktRouteImport } from './routes/bedankt'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as KostenEnVergoedingRouteImport } from './routes/kosten-en-vergoeding'
+import { Route as OverOnsRouteImport } from './routes/over-ons'
+import { Route as VeelgesteldeVragenRouteImport } from './routes/veelgestelde-vragen'
+import { Route as VoorVerwijzersRouteImport } from './routes/voor-verwijzers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AanmeldenRoute = AanmeldenRouteImport.update({
+  id: '/aanmelden',
+  path: '/aanmelden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdhdBehandelingRoute = AdhdBehandelingRouteImport.update({
+  id: '/adhd-behandeling',
+  path: '/adhd-behandeling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdhdDiagnostiekRoute = AdhdDiagnostiekRouteImport.update({
+  id: '/adhd-diagnostiek',
+  path: '/adhd-diagnostiek',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BedanktRoute = BedanktRouteImport.update({
+  id: '/bedankt',
+  path: '/bedankt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KostenEnVergoedingRoute = KostenEnVergoedingRouteImport.update({
+  id: '/kosten-en-vergoeding',
+  path: '/kosten-en-vergoeding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OverOnsRoute = OverOnsRouteImport.update({
+  id: '/over-ons',
+  path: '/over-ons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VeelgesteldeVragenRoute = VeelgesteldeVragenRouteImport.update({
+  id: '/veelgestelde-vragen',
+  path: '/veelgestelde-vragen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoorVerwijzersRoute = VoorVerwijzersRouteImport.update({
+  id: '/voor-verwijzers',
+  path: '/voor-verwijzers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aanmelden': typeof AanmeldenRoute
+  '/adhd-behandeling': typeof AdhdBehandelingRoute
+  '/adhd-diagnostiek': typeof AdhdDiagnostiekRoute
+  '/bedankt': typeof BedanktRoute
+  '/contact': typeof ContactRoute
+  '/kosten-en-vergoeding': typeof KostenEnVergoedingRoute
+  '/over-ons': typeof OverOnsRoute
+  '/veelgestelde-vragen': typeof VeelgesteldeVragenRoute
+  '/voor-verwijzers': typeof VoorVerwijzersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aanmelden': typeof AanmeldenRoute
+  '/adhd-behandeling': typeof AdhdBehandelingRoute
+  '/adhd-diagnostiek': typeof AdhdDiagnostiekRoute
+  '/bedankt': typeof BedanktRoute
+  '/contact': typeof ContactRoute
+  '/kosten-en-vergoeding': typeof KostenEnVergoedingRoute
+  '/over-ons': typeof OverOnsRoute
+  '/veelgestelde-vragen': typeof VeelgesteldeVragenRoute
+  '/voor-verwijzers': typeof VoorVerwijzersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aanmelden': typeof AanmeldenRoute
+  '/adhd-behandeling': typeof AdhdBehandelingRoute
+  '/adhd-diagnostiek': typeof AdhdDiagnostiekRoute
+  '/bedankt': typeof BedanktRoute
+  '/contact': typeof ContactRoute
+  '/kosten-en-vergoeding': typeof KostenEnVergoedingRoute
+  '/over-ons': typeof OverOnsRoute
+  '/veelgestelde-vragen': typeof VeelgesteldeVragenRoute
+  '/voor-verwijzers': typeof VoorVerwijzersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/aanmelden'
+    | '/adhd-behandeling'
+    | '/adhd-diagnostiek'
+    | '/bedankt'
+    | '/contact'
+    | '/kosten-en-vergoeding'
+    | '/over-ons'
+    | '/veelgestelde-vragen'
+    | '/voor-verwijzers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/aanmelden'
+    | '/adhd-behandeling'
+    | '/adhd-diagnostiek'
+    | '/bedankt'
+    | '/contact'
+    | '/kosten-en-vergoeding'
+    | '/over-ons'
+    | '/veelgestelde-vragen'
+    | '/voor-verwijzers'
+  id:
+    | '__root__'
+    | '/'
+    | '/aanmelden'
+    | '/adhd-behandeling'
+    | '/adhd-diagnostiek'
+    | '/bedankt'
+    | '/contact'
+    | '/kosten-en-vergoeding'
+    | '/over-ons'
+    | '/veelgestelde-vragen'
+    | '/voor-verwijzers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AanmeldenRoute: typeof AanmeldenRoute
+  AdhdBehandelingRoute: typeof AdhdBehandelingRoute
+  AdhdDiagnostiekRoute: typeof AdhdDiagnostiekRoute
+  BedanktRoute: typeof BedanktRoute
+  ContactRoute: typeof ContactRoute
+  KostenEnVergoedingRoute: typeof KostenEnVergoedingRoute
+  OverOnsRoute: typeof OverOnsRoute
+  VeelgesteldeVragenRoute: typeof VeelgesteldeVragenRoute
+  VoorVerwijzersRoute: typeof VoorVerwijzersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aanmelden': {
+      id: '/aanmelden'
+      path: '/aanmelden'
+      fullPath: '/aanmelden'
+      preLoaderRoute: typeof AanmeldenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adhd-behandeling': {
+      id: '/adhd-behandeling'
+      path: '/adhd-behandeling'
+      fullPath: '/adhd-behandeling'
+      preLoaderRoute: typeof AdhdBehandelingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adhd-diagnostiek': {
+      id: '/adhd-diagnostiek'
+      path: '/adhd-diagnostiek'
+      fullPath: '/adhd-diagnostiek'
+      preLoaderRoute: typeof AdhdDiagnostiekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bedankt': {
+      id: '/bedankt'
+      path: '/bedankt'
+      fullPath: '/bedankt'
+      preLoaderRoute: typeof BedanktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kosten-en-vergoeding': {
+      id: '/kosten-en-vergoeding'
+      path: '/kosten-en-vergoeding'
+      fullPath: '/kosten-en-vergoeding'
+      preLoaderRoute: typeof KostenEnVergoedingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/over-ons': {
+      id: '/over-ons'
+      path: '/over-ons'
+      fullPath: '/over-ons'
+      preLoaderRoute: typeof OverOnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/veelgestelde-vragen': {
+      id: '/veelgestelde-vragen'
+      path: '/veelgestelde-vragen'
+      fullPath: '/veelgestelde-vragen'
+      preLoaderRoute: typeof VeelgesteldeVragenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/voor-verwijzers': {
+      id: '/voor-verwijzers'
+      path: '/voor-verwijzers'
+      fullPath: '/voor-verwijzers'
+      preLoaderRoute: typeof VoorVerwijzersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AanmeldenRoute: AanmeldenRoute,
+  AdhdBehandelingRoute: AdhdBehandelingRoute,
+  AdhdDiagnostiekRoute: AdhdDiagnostiekRoute,
+  BedanktRoute: BedanktRoute,
+  ContactRoute: ContactRoute,
+  KostenEnVergoedingRoute: KostenEnVergoedingRoute,
+  OverOnsRoute: OverOnsRoute,
+  VeelgesteldeVragenRoute: VeelgesteldeVragenRoute,
+  VoorVerwijzersRoute: VoorVerwijzersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
