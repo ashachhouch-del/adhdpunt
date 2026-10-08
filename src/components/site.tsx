@@ -157,10 +157,10 @@ export function meta(title: string, description: string) {
 export function Logo({ inverse }: { inverse?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2 ${inverse ? "text-primary-foreground" : "text-primary"}`}>
-      <svg viewBox="0 0 64 34" className="h-8 w-auto" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M14 10 L22 10 L26 17 L22 24 L14 24 L10 17 Z" />
-        <path d="M17 15 L19 15 M16 20 L20 20" strokeWidth="2.5" />
-        <path d="M14 10 L11 3 M10 17 L3 17 M26 17 L34 23 L42 19 L50 23" />
+      <svg viewBox="0 0 64 34" className="h-9 w-auto" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M13.5 9 L22.5 9 L27 17 L22.5 25 L13.5 25 L9 17 Z" />
+        <path d="M15.5 13 L20.5 13 M15.5 21 L20.5 21" strokeWidth="2.5" />
+        <path d="M13.5 9 L10 2 M9 17 L2 17 M27 17 L35 23 L43 18 L50 22" />
         <circle cx="55" cy="25" r="5" fill="var(--accent)" stroke="none" />
       </svg>
       <span className="text-xl font-extrabold tracking-tight">
