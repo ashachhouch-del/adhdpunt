@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CtaBand, CtaButton, Section, meta } from "@/components/site";
+
+export const WACHTTIJD_DAGEN = 30;
 
 export const Route = createFileRoute("/")({
   head: () => meta("ADHD-zorg voor volwassenen", "ADHD Care biedt zorgvuldige ADHD-diagnostiek en behandeling voor volwassenen. Meld je direct aan."),
