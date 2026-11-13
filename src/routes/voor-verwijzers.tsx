@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Card, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/voor-verwijzers")({
-  head: () => meta("Voor verwijzers", "Informatie voor huisartsen en POH-GGZ over verwijzen naar ADHD Care."),
+  head: () => meta("Voor verwijzers", "Informatie voor huisartsen en POH-GGZ over verwijzen naar ADHD Punt."),
   component: Page,
 });
 

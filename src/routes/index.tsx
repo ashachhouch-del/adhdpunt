@@ -5,7 +5,7 @@ import { Card, CtaBand, CtaButton, Section, meta } from "@/components/site";
 export const WACHTTIJD_DAGEN = 30;
 
 export const Route = createFileRoute("/")({
-  head: () => meta("ADHD-zorg voor volwassenen", "ADHD Care biedt zorgvuldige ADHD-diagnostiek en behandeling voor volwassenen. Meld je direct aan."),
+  head: () => meta("ADHD-zorg voor volwassenen", "ADHD Punt biedt zorgvuldige ADHD-diagnostiek en behandeling voor volwassenen. Meld je direct aan."),
   component: Index,
 });
 
@@ -61,7 +61,7 @@ function Index() {
             Duidelijkheid over ADHD, in jouw tempo.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Loop je vast met concentratie, planning of onrust? Bij ADHD Care krijg je een zorgvuldig onderzoek en
+            Loop je vast met concentratie, planning of onrust? Bij ADHD Punt krijg je een zorgvuldig onderzoek en
             persoonlijke begeleiding door ervaren specialisten.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">

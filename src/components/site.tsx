@@ -16,7 +16,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to="/" aria-label="ADHD Care home">
+        <Link to="/" aria-label="ADHD Punt home">
           <Logo />
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-medium lg:flex">
@@ -141,7 +141,7 @@ export function CtaBand() {
 }
 
 export function meta(title: string, description: string) {
-  const t = `${title} | ADHD Care`;
+  const t = `${title} | ADHD Punt`;
   return {
     meta: [
       { title: t },
@@ -164,7 +164,7 @@ export function Logo({ inverse }: { inverse?: boolean }) {
         <circle cx="55" cy="25" r="5" fill="var(--accent)" stroke="none" />
       </svg>
       <span className="text-xl font-extrabold tracking-tight">
-        ADHD <span className="font-semibold">Care</span>
+        ADHD <span className="font-semibold">Punt</span>
       </span>
     </span>
   );

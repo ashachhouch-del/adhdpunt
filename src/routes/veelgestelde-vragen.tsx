@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/veelgestelde-vragen")({
-  head: () => meta("Veelgestelde vragen", "Antwoorden op veelgestelde vragen over aanmelden, diagnostiek, behandeling en kosten bij ADHD Care."),
+  head: () => meta("Veelgestelde vragen", "Antwoorden op veelgestelde vragen over aanmelden, diagnostiek, behandeling en kosten bij ADHD Punt."),
   component: Page,
 });
 

@@ -3,7 +3,7 @@ import { useState, type FormEvent } from "react";
 import { PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/aanmelden")({
-  head: () => meta("Direct aanmelden", "Meld je direct aan bij ADHD Care voor diagnostiek of behandeling van ADHD."),
+  head: () => meta("Direct aanmelden", "Meld je direct aan bij ADHD Punt voor diagnostiek of behandeling van ADHD."),
   component: Page,
 });
 
@@ -26,12 +26,12 @@ function Page() {
 
   return (
     <>
-      <PageHero title="Direct aanmelden" intro="ADHD Care is gespecialiseerd in diagnostiek en behandeling van ADHD bij volwassenen. Hieronder lees je hoe aanmelden werkt, voor jezelf of als verwijzer." />
+      <PageHero title="Direct aanmelden" intro="ADHD Punt is gespecialiseerd in diagnostiek en behandeling van ADHD bij volwassenen. Hieronder lees je hoe aanmelden werkt, voor jezelf of als verwijzer." />
       <Section title="Zo meld je je aan">
         <ol className="space-y-3">
           {[
             "Bespreek je klachten met je huisarts.",
-            "Vindt je huisarts een verwijzing passend? Dan stuurt hij of zij een verwijsbrief naar ADHD Care.",
+            "Vindt je huisarts een verwijzing passend? Dan stuurt hij of zij een verwijsbrief naar ADHD Punt.",
             "Na ontvangst van de verwijzing nemen we contact met je op om een intakegesprek te plannen.",
           ].map((s, i) => (
             <li key={s} className="flex gap-4">

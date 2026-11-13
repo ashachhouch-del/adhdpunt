@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Card, CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/kosten-en-vergoeding")({
-  head: () => meta("Kosten & vergoeding", "ADHD-zorg bij ADHD Care valt onder de basisverzekering. Lees wat je eigen risico betekent."),
+  head: () => meta("Kosten & vergoeding", "ADHD-zorg bij ADHD Punt valt onder de basisverzekering. Lees wat je eigen risico betekent."),
   component: Page,
 });
 
