@@ -3,7 +3,7 @@ import { Card, CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/kosten-en-vergoeding")({
   staticData: { sitemap: true },
-  head: () => meta("Kosten & vergoeding", "ADHD-zorg bij ADHD Punt valt onder de basisverzekering. Lees wat je eigen risico betekent."),
+  head: () => meta("Kosten en vergoeding van ADHD-zorg", "Lees over de kosten en vergoeding van ADHD-diagnostiek en behandeling, je eigen risico en de benodigde huisartsverwijzing bij ADHD Punt.", "/kosten-en-vergoeding"),
   component: Page,
 });
 

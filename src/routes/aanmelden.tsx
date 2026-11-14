@@ -4,7 +4,7 @@ import { PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/aanmelden")({
   staticData: { sitemap: true },
-  head: () => meta("Direct aanmelden", "Meld je direct aan bij ADHD Punt voor diagnostiek of behandeling van ADHD."),
+  head: () => meta("Aanmelden voor ADHD-diagnostiek en behandeling", "Lees hoe je je aanmeldt bij ADHD Punt, welke verwijzing je nodig hebt en voor wie onze ADHD-zorg voor volwassenen passend is.", "/aanmelden"),
   component: Page,
 });
 

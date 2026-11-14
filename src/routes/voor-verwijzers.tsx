@@ -3,7 +3,7 @@ import { Card, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/voor-verwijzers")({
   staticData: { sitemap: true },
-  head: () => meta("Voor verwijzers", "Informatie voor huisartsen en POH-GGZ over verwijzen naar ADHD Punt."),
+  head: () => meta("ADHD-verwijzing: informatie voor huisartsen", "Informatie voor huisartsen en POH-GGZ over verwijzen naar ADHD Punt voor diagnostiek en behandeling van volwassenen, overleg en terugkoppeling.", "/voor-verwijzers"),
   component: Page,
 });
 

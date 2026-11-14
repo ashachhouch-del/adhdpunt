@@ -4,7 +4,7 @@ import { CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/veelgestelde-vragen")({
   staticData: { sitemap: true },
-  head: () => meta("Veelgestelde vragen", "Antwoorden op veelgestelde vragen over aanmelden, diagnostiek, behandeling en kosten bij ADHD Punt."),
+  head: () => meta("Veelgestelde vragen over ADHD-zorg", "Antwoorden op vragen over ADHD-zorg bij ADHD Punt: aanmelden, verwijzingen, diagnostiek, behandeling, kosten en vergoeding voor volwassenen.", "/veelgestelde-vragen"),
   component: Page,
 });
 

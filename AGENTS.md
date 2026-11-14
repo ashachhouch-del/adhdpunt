@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Derive sitemap URLs from the router with required `staticData.sitemap` decisions; this keeps public page discovery current while excluding confirmation pages.
+- Every content route passes its own path to the shared metadata helper; leaf-only canonicals, share URLs and WebPage data prevent pages being attributed to the homepage.

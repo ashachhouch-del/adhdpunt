@@ -140,8 +140,9 @@ export function CtaBand() {
   );
 }
 
-export function meta(title: string, description: string) {
+export function meta(title: string, description: string, path: string) {
   const t = `${title} | ADHD Punt`;
+  const url = new URL(path, "https://adhdpunt.nl").href;
   return {
     meta: [
       { title: t },
@@ -149,8 +150,26 @@ export function meta(title: string, description: string) {
       { property: "og:title", content: t },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:locale", content: "nl_NL" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: t },
+      { name: "twitter:description", content: description },
     ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: t,
+        description,
+        inLanguage: "nl-NL",
+        isPartOf: { "@id": "https://adhdpunt.nl/#website" },
+      }),
+    }],
   };
 }
 

@@ -4,7 +4,7 @@ import { PageHero, meta } from "@/components/site";
 export const Route = createFileRoute("/bedankt")({
   staticData: { sitemap: false },
   head: () => {
-    const metadata = meta("Bedankt voor je aanmelding", "Je aanmelding bij ADHD Punt is ontvangen.");
+    const metadata = meta("Bedankt voor je aanmelding", "Je aanmelding bij ADHD Punt is ontvangen.", "/bedankt");
     return { ...metadata, meta: [...metadata.meta, { name: "robots", content: "noindex" }] };
   },
   component: Page,

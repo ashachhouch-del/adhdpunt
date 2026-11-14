@@ -3,7 +3,7 @@ import { Card, CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/over-ons")({
   staticData: { sitemap: true },
-  head: () => meta("Over ADHD Punt", "Wie we zijn en hoe we werken: een gespecialiseerd team voor ADHD bij volwassenen."),
+  head: () => meta("Over ADHD Punt: persoonlijke ADHD-zorg", "Maak kennis met ADHD Punt en onze aanpak voor volwassenen met ADHD: persoonlijke aandacht, zorgvuldig onderzoek en duidelijke uitleg.", "/over-ons"),
   component: Page,
 });
 

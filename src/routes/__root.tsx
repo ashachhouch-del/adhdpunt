@@ -80,8 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ADHD Punt" },
-      { name: "description", content: "Specialistische ADHD-zorg voor volwassenen." },
+      { property: "og:site_name", content: "ADHD Punt" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -90,6 +89,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" },
     ],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://adhdpunt.nl/#website",
+        url: "https://adhdpunt.nl/",
+        name: "ADHD Punt",
+        inLanguage: "nl-NL",
+      }),
+    }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
