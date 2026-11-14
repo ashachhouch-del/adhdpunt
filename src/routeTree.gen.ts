@@ -17,6 +17,7 @@ import { Route as BedanktRouteImport } from './routes/bedankt'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as KostenEnVergoedingRouteImport } from './routes/kosten-en-vergoeding'
 import { Route as OverOnsRouteImport } from './routes/over-ons'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as VeelgesteldeVragenRouteImport } from './routes/veelgestelde-vragen'
 import { Route as VoorVerwijzersRouteImport } from './routes/voor-verwijzers'
 
@@ -60,6 +61,11 @@ const OverOnsRoute = OverOnsRouteImport.update({
   path: '/over-ons',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VeelgesteldeVragenRoute = VeelgesteldeVragenRouteImport.update({
   id: '/veelgestelde-vragen',
   path: '/veelgestelde-vragen',
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/kosten-en-vergoeding': typeof KostenEnVergoedingRoute
   '/over-ons': typeof OverOnsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/veelgestelde-vragen': typeof VeelgesteldeVragenRoute
   '/voor-verwijzers': typeof VoorVerwijzersRoute
 }
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/kosten-en-vergoeding': typeof KostenEnVergoedingRoute
   '/over-ons': typeof OverOnsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/veelgestelde-vragen': typeof VeelgesteldeVragenRoute
   '/voor-verwijzers': typeof VoorVerwijzersRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/kosten-en-vergoeding': typeof KostenEnVergoedingRoute
   '/over-ons': typeof OverOnsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/veelgestelde-vragen': typeof VeelgesteldeVragenRoute
   '/voor-verwijzers': typeof VoorVerwijzersRoute
 }
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/kosten-en-vergoeding'
     | '/over-ons'
+    | '/sitemap.xml'
     | '/veelgestelde-vragen'
     | '/voor-verwijzers'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/kosten-en-vergoeding'
     | '/over-ons'
+    | '/sitemap.xml'
     | '/veelgestelde-vragen'
     | '/voor-verwijzers'
   id:
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/kosten-en-vergoeding'
     | '/over-ons'
+    | '/sitemap.xml'
     | '/veelgestelde-vragen'
     | '/voor-verwijzers'
   fileRoutesById: FileRoutesById
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   KostenEnVergoedingRoute: typeof KostenEnVergoedingRoute
   OverOnsRoute: typeof OverOnsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VeelgesteldeVragenRoute: typeof VeelgesteldeVragenRoute
   VoorVerwijzersRoute: typeof VoorVerwijzersRoute
 }
@@ -218,6 +231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OverOnsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/veelgestelde-vragen': {
       id: '/veelgestelde-vragen'
       path: '/veelgestelde-vragen'
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   KostenEnVergoedingRoute: KostenEnVergoedingRoute,
   OverOnsRoute: OverOnsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   VeelgesteldeVragenRoute: VeelgesteldeVragenRoute,
   VoorVerwijzersRoute: VoorVerwijzersRoute,
 }
