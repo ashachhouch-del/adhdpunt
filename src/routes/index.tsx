@@ -5,6 +5,7 @@ import { Card, CtaBand, CtaButton, Section, meta } from "@/components/site";
 export const WACHTTIJD_DAGEN = 14;
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => meta("ADHD-zorg voor volwassenen", "ADHD Punt biedt zorgvuldige ADHD-diagnostiek en behandeling voor volwassenen. Meld je direct aan."),
   component: Index,
 });

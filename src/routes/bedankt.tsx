@@ -2,7 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, meta } from "@/components/site";
 
 export const Route = createFileRoute("/bedankt")({
-  head: () => meta("Bedankt voor je aanmelding", "Je aanmelding bij ADHD Punt is ontvangen."),
+  staticData: { sitemap: false },
+  head: () => {
+    const metadata = meta("Bedankt voor je aanmelding", "Je aanmelding bij ADHD Punt is ontvangen.");
+    return { ...metadata, meta: [...metadata.meta, { name: "robots", content: "noindex" }] };
+  },
   component: Page,
 });
 

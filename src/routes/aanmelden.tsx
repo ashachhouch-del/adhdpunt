@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/aanmelden")({
+  staticData: { sitemap: true },
   head: () => meta("Direct aanmelden", "Meld je direct aan bij ADHD Punt voor diagnostiek of behandeling van ADHD."),
   component: Page,
 });

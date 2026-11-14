@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Card, CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/adhd-diagnostiek")({
+  staticData: { sitemap: true },
   head: () => meta("ADHD-diagnostiek", "Hoe het ADHD-onderzoek voor volwassenen bij ADHD Punt verloopt: intake, onderzoek en adviesgesprek."),
   component: Page,
 });

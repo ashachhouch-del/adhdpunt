@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Card, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => meta("Contact", "Neem contact op met ADHD Punt per e-mail of telefoon."),
   component: Page,
 });
