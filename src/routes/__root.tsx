@@ -82,19 +82,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap",
+      },
     ],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://adhdpunt.nl/#website",
-        url: "https://adhdpunt.nl/",
-        name: "ADHDPunt",
-        inLanguage: "nl-NL",
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://adhdpunt.nl/#website",
+          url: "https://adhdpunt.nl/",
+          name: "ADHDPunt",
+          inLanguage: "nl-NL",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

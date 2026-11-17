@@ -19,8 +19,15 @@ describe("App routing", () => {
   it("lists all nine public content pages without the confirmation or sitemap endpoint", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
     expect(sitemapStaticPaths(router)).toEqual([
-      "/", "/aanmelden", "/adhd-behandeling", "/adhd-diagnostiek", "/contact",
-      "/kosten-en-vergoeding", "/over-ons", "/veelgestelde-vragen", "/voor-verwijzers",
+      "/",
+      "/aanmelden",
+      "/adhd-behandeling",
+      "/adhd-diagnostiek",
+      "/contact",
+      "/kosten-en-vergoeding",
+      "/over-ons",
+      "/veelgestelde-vragen",
+      "/voor-verwijzers",
     ]);
   });
 

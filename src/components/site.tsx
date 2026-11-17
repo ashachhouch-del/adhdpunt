@@ -21,7 +21,12 @@ export function Header() {
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-medium lg:flex">
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} className="hover:text-primary" activeProps={{ className: "text-primary" }}>
+            <Link
+              key={n.to}
+              to={n.to}
+              className="hover:text-primary"
+              activeProps={{ className: "text-primary" }}
+            >
               {n.label}
             </Link>
           ))}
@@ -40,7 +45,12 @@ export function Header() {
       {open && (
         <nav className="border-t px-4 py-3 lg:hidden">
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="block py-2 font-medium">
+            <Link
+              key={n.to}
+              to={n.to}
+              onClick={() => setOpen(false)}
+              className="block py-2 font-medium"
+            >
               {n.label}
             </Link>
           ))}
@@ -50,7 +60,13 @@ export function Header() {
   );
 }
 
-export function CtaButton({ small, label = "Direct aanmelden" }: { small?: boolean; label?: string }) {
+export function CtaButton({
+  small,
+  label = "Direct aanmelden",
+}: {
+  small?: boolean;
+  label?: string;
+}) {
   return (
     <Link
       to="/aanmelden"
@@ -64,7 +80,10 @@ export function CtaButton({ small, label = "Direct aanmelden" }: { small?: boole
 export function MobileCta() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background p-3 md:hidden">
-      <Link to="/aanmelden" className="block rounded-full bg-accent py-3 text-center font-bold text-accent-foreground">
+      <Link
+        to="/aanmelden"
+        className="block rounded-full bg-accent py-3 text-center font-bold text-accent-foreground"
+      >
         Direct aanmelden
       </Link>
     </div>
@@ -83,7 +102,9 @@ export function Footer() {
           <p className="font-bold">Pagina's</p>
           <ul className="mt-2 space-y-1 opacity-90">
             {nav.map((n) => (
-              <li key={n.to}><Link to={n.to}>{n.label}</Link></li>
+              <li key={n.to}>
+                <Link to={n.to}>{n.label}</Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -98,7 +119,15 @@ export function Footer() {
   );
 }
 
-export function PageHero({ title, intro, children }: { title: string; intro: string; children?: ReactNode }) {
+export function PageHero({
+  title,
+  intro,
+  children,
+}: {
+  title: string;
+  intro: string;
+  children?: ReactNode;
+}) {
   return (
     <section className="bg-muted">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-20">
@@ -133,8 +162,12 @@ export function CtaBand() {
     <Section>
       <div className="rounded-2xl bg-primary p-8 text-primary-foreground md:p-12">
         <h2 className="text-2xl font-extrabold">Klaar om de eerste stap te zetten?</h2>
-        <p className="mt-2 opacity-90">Aanmelden duurt een paar minuten. Wij nemen daarna contact met je op.</p>
-        <div className="mt-6"><CtaButton /></div>
+        <p className="mt-2 opacity-90">
+          Aanmelden duurt een paar minuten. Wij nemen daarna contact met je op.
+        </p>
+        <div className="mt-6">
+          <CtaButton />
+        </div>
       </div>
     </Section>
   );
@@ -157,26 +190,39 @@ export function meta(title: string, description: string, path: string) {
       { name: "twitter:description", content: description },
     ],
     links: [{ rel: "canonical", href: url }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "@id": `${url}#webpage`,
-        url,
-        name: t,
-        description,
-        inLanguage: "nl-NL",
-        isPartOf: { "@id": "https://adhdpunt.nl/#website" },
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": `${url}#webpage`,
+          url,
+          name: t,
+          description,
+          inLanguage: "nl-NL",
+          isPartOf: { "@id": "https://adhdpunt.nl/#website" },
+        }),
+      },
+    ],
   };
 }
 
 export function Logo({ inverse }: { inverse?: boolean }) {
   return (
-    <span className={`inline-flex items-center gap-2 ${inverse ? "text-primary-foreground" : "text-primary"}`}>
-      <svg viewBox="0 0 64 34" className="h-9 w-auto" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <span
+      className={`inline-flex items-center gap-2 ${inverse ? "text-primary-foreground" : "text-primary"}`}
+    >
+      <svg
+        viewBox="0 0 64 34"
+        className="h-9 w-auto"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
         <path d="M13.5 9 L22.5 9 L27 17 L22.5 25 L13.5 25 L9 17 Z" />
         <path d="M15.5 13 L20.5 13 M15.5 21 L20.5 21" strokeWidth="2.5" />
         <path d="M13.5 9 L10 2 M9 17 L2 17 M27 17 L35 23 L43 18 L50 22" />

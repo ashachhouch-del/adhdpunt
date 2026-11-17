@@ -4,17 +4,46 @@ import { CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/veelgestelde-vragen")({
   staticData: { sitemap: true },
-  head: () => meta("Veelgestelde vragen over ADHD-zorg", "Antwoorden op vragen over ADHD-zorg bij ADHDPunt: aanmelden, verwijzingen, diagnostiek, behandeling, kosten en vergoeding voor volwassenen.", "/veelgestelde-vragen"),
+  head: () =>
+    meta(
+      "Veelgestelde vragen over ADHD-zorg",
+      "Antwoorden op vragen over ADHD-zorg bij ADHDPunt: aanmelden, verwijzingen, diagnostiek, behandeling, kosten en vergoeding voor volwassenen.",
+      "/veelgestelde-vragen",
+    ),
   component: Page,
 });
 
 const faqs = [
-  { c: "Aanmelden", q: "Heb ik een verwijzing nodig?", a: "Ja, een verwijsbrief van je huisarts is nodig voor vergoeding." },
-  { c: "Aanmelden", q: "Hoe lang is de wachttijd?", a: "Dat verschilt per periode. Na je aanmelding laten we je weten wat je kunt verwachten." },
-  { c: "Diagnostiek", q: "Hoe lang duurt het onderzoek?", a: "Meestal een paar afspraken verspreid over enkele weken." },
-  { c: "Diagnostiek", q: "Mag ik iemand meenemen?", a: "Ja, een naaste kan juist waardevolle informatie geven." },
-  { c: "Behandeling", q: "Krijg ik altijd medicatie?", a: "Nee. Medicatie is één van de mogelijkheden en wordt samen met jou afgewogen." },
-  { c: "Kosten", q: "Wordt het vergoed?", a: "ADHD-zorg valt onder de basisverzekering. Je eigen risico is van toepassing." },
+  {
+    c: "Aanmelden",
+    q: "Heb ik een verwijzing nodig?",
+    a: "Ja, een verwijsbrief van je huisarts is nodig voor vergoeding.",
+  },
+  {
+    c: "Aanmelden",
+    q: "Hoe lang is de wachttijd?",
+    a: "Dat verschilt per periode. Na je aanmelding laten we je weten wat je kunt verwachten.",
+  },
+  {
+    c: "Diagnostiek",
+    q: "Hoe lang duurt het onderzoek?",
+    a: "Meestal een paar afspraken verspreid over enkele weken.",
+  },
+  {
+    c: "Diagnostiek",
+    q: "Mag ik iemand meenemen?",
+    a: "Ja, een naaste kan juist waardevolle informatie geven.",
+  },
+  {
+    c: "Behandeling",
+    q: "Krijg ik altijd medicatie?",
+    a: "Nee. Medicatie is één van de mogelijkheden en wordt samen met jou afgewogen.",
+  },
+  {
+    c: "Kosten",
+    q: "Wordt het vergoed?",
+    a: "ADHD-zorg valt onder de basisverzekering. Je eigen risico is van toepassing.",
+  },
 ];
 const cats = ["Alle", ...Array.from(new Set(faqs.map((f) => f.c)))];
 
@@ -26,7 +55,10 @@ function Page() {
   );
   return (
     <>
-      <PageHero title="Veelgestelde vragen" intro="Staat je vraag er niet bij? Neem gerust contact met ons op." />
+      <PageHero
+        title="Veelgestelde vragen"
+        intro="Staat je vraag er niet bij? Neem gerust contact met ons op."
+      />
       <Section>
         <input
           value={q}

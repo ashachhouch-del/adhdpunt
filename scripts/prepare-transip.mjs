@@ -48,16 +48,19 @@ for (const file of files) {
   if (!/\.(html|js|css|xml|txt|json)$/.test(file)) continue;
   const text = readFileSync(file, "utf8");
   if (/lovable/i.test(text)) fail(`"lovable" reference found in ${relative(source, file)}`);
-  if (/ADHD Punt/.test(text)) fail(`brand spelled "ADHD Punt" in ${relative(source, file)} (must be "ADHDPunt")`);
+  if (/ADHD Punt/.test(text))
+    fail(`brand spelled "ADHD Punt" in ${relative(source, file)} (must be "ADHDPunt")`);
 }
 
 const sitemap = readFileSync(join(source, "sitemap.xml"), "utf8");
-if (!sitemap.includes("<loc>https://adhdpunt.nl/</loc>")) fail("sitemap.xml does not list https://adhdpunt.nl/");
+if (!sitemap.includes("<loc>https://adhdpunt.nl/</loc>"))
+  fail("sitemap.xml does not list https://adhdpunt.nl/");
 if (sitemap.includes("/bedankt")) fail("sitemap.xml must not list /bedankt");
 
 for (const page of requiredFiles.filter((f) => f.endsWith(".html") && f !== "_shell.html")) {
   const html = readFileSync(join(source, page), "utf8");
-  if (!/<link[^>]+rel="canonical"/.test(html)) fail(`${page} has no canonical link (prerender incomplete?)`);
+  if (!/<link[^>]+rel="canonical"/.test(html))
+    fail(`${page} has no canonical link (prerender incomplete?)`);
   if (!/<h1/.test(html)) fail(`${page} has no prerendered <h1>`);
 }
 
@@ -65,4 +68,6 @@ rmSync(target, { recursive: true, force: true });
 cpSync(source, target, { recursive: true });
 
 console.log(`[prepare-transip] OK – ${files.length} files copied to transip-deploy/`);
-console.log("[prepare-transip] Upload the CONTENTS of transip-deploy/ (including the hidden .htaccess) to the web root.");
+console.log(
+  "[prepare-transip] Upload the CONTENTS of transip-deploy/ (including the hidden .htaccess) to the web root.",
+);

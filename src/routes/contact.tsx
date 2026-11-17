@@ -3,7 +3,12 @@ import { Card, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/contact")({
   staticData: { sitemap: true },
-  head: () => meta("Contact met ADHDPunt", "Neem contact op met ADHDPunt voor vragen over ADHD-diagnostiek, behandeling of aanmelden. Bekijk onze contactgegevens en bereikbaarheid.", "/contact"),
+  head: () =>
+    meta(
+      "Contact met ADHDPunt",
+      "Neem contact op met ADHDPunt voor vragen over ADHD-diagnostiek, behandeling of aanmelden. Bekijk onze contactgegevens en bereikbaarheid.",
+      "/contact",
+    ),
   component: Page,
 });
 

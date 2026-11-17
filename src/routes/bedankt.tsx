@@ -4,7 +4,11 @@ import { PageHero, meta } from "@/components/site";
 export const Route = createFileRoute("/bedankt")({
   staticData: { sitemap: false },
   head: () => {
-    const metadata = meta("Bedankt voor je aanmelding", "Je aanmelding bij ADHDPunt is ontvangen.", "/bedankt");
+    const metadata = meta(
+      "Bedankt voor je aanmelding",
+      "Je aanmelding bij ADHDPunt is ontvangen.",
+      "/bedankt",
+    );
     return { ...metadata, meta: [...metadata.meta, { name: "robots", content: "noindex" }] };
   },
   component: Page,
@@ -12,8 +16,13 @@ export const Route = createFileRoute("/bedankt")({
 
 function Page() {
   return (
-    <PageHero title="Bedankt voor je aanmelding" intro="We hebben je gegevens ontvangen en nemen binnen enkele werkdagen contact met je op.">
-      <Link to="/" className="rounded-full border border-primary px-6 py-3 font-bold text-primary">Terug naar home</Link>
+    <PageHero
+      title="Bedankt voor je aanmelding"
+      intro="We hebben je gegevens ontvangen en nemen binnen enkele werkdagen contact met je op."
+    >
+      <Link to="/" className="rounded-full border border-primary px-6 py-3 font-bold text-primary">
+        Terug naar home
+      </Link>
     </PageHero>
   );
 }

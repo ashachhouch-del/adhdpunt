@@ -6,7 +6,12 @@ export const WACHTTIJD_DAGEN = 14;
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
-  head: () => meta("ADHD-diagnostiek en behandeling voor volwassenen", "ADHDPunt biedt persoonlijke ADHD-diagnostiek en behandeling voor volwassenen. Lees over het onderzoek, de zorg, aanmelden en kosten.", "/"),
+  head: () =>
+    meta(
+      "ADHD-diagnostiek en behandeling voor volwassenen",
+      "ADHDPunt biedt persoonlijke ADHD-diagnostiek en behandeling voor volwassenen. Lees over het onderzoek, de zorg, aanmelden en kosten.",
+      "/",
+    ),
   component: Index,
 });
 
@@ -14,7 +19,10 @@ const steps = [
   ["Aanmelden", "Vul het korte aanmeldformulier in. Een verwijzing van je huisarts is nodig."],
   ["Intake", "We bespreken je klachten, je achtergrond en wat je zoekt."],
   ["Diagnostiek", "Een zorgvuldig onderzoek met gesprekken en vragenlijsten."],
-  ["Advies & behandeling", "Je krijgt een helder advies en, als het past, een behandeling op maat."],
+  [
+    "Advies & behandeling",
+    "Je krijgt een helder advies en, als het past, een behandeling op maat.",
+  ],
 ];
 
 function WaitTimeCounter() {
@@ -37,15 +45,21 @@ function WaitTimeCounter() {
   return (
     <section className="bg-primary text-primary-foreground">
       <div className="mx-auto max-w-4xl px-4 py-14 text-center md:py-16">
-        <p className="text-sm font-bold uppercase tracking-widest text-primary-foreground/80">Onze wachttijd</p>
+        <p className="text-sm font-bold uppercase tracking-widest text-primary-foreground/80">
+          Onze wachttijd
+        </p>
         <div className="mt-4 flex items-baseline justify-center gap-3">
-          <span className="text-7xl font-extrabold leading-none tabular-nums md:text-8xl" aria-label={`${WACHTTIJD_DAGEN} dagen`}>
+          <span
+            className="text-7xl font-extrabold leading-none tabular-nums md:text-8xl"
+            aria-label={`${WACHTTIJD_DAGEN} dagen`}
+          >
             {days}
           </span>
           <span className="text-2xl font-bold md:text-3xl">dagen</span>
         </div>
         <p className="mx-auto mt-4 max-w-xl text-primary-foreground/90">
-          Dat is nu de wachttijd tussen je aanmelding en je intakegesprek. We werken hard om deze zo kort mogelijk te houden.
+          Dat is nu de wachttijd tussen je aanmelding en je intakegesprek. We werken hard om deze zo
+          kort mogelijk te houden.
         </p>
       </div>
     </section>
@@ -62,12 +76,15 @@ function Index() {
             Duidelijkheid over ADHD, in jouw tempo.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Loop je vast met concentratie, planning of onrust? Bij ADHDPunt krijg je een zorgvuldig onderzoek en
-            persoonlijke begeleiding door ervaren specialisten.
+            Loop je vast met concentratie, planning of onrust? Bij ADHDPunt krijg je een zorgvuldig
+            onderzoek en persoonlijke begeleiding door ervaren specialisten.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <CtaButton />
-            <Link to="/adhd-diagnostiek" className="rounded-full border border-primary px-6 py-3 font-bold text-primary">
+            <Link
+              to="/adhd-diagnostiek"
+              className="rounded-full border border-primary px-6 py-3 font-bold text-primary"
+            >
               Hoe werkt diagnostiek?
             </Link>
           </div>
@@ -78,9 +95,15 @@ function Index() {
 
       <Section title="Wat we voor je doen">
         <div className="grid gap-4 md:grid-cols-3">
-          <Card title="Diagnostiek">Een grondig onderzoek naar ADHD, met aandacht voor wat er nog meer kan spelen.</Card>
-          <Card title="Behandeling">Psycho-educatie, coaching en waar passend medicatie, afgestemd op jou.</Card>
-          <Card title="Vergoed">ADHD-zorg valt onder de basisverzekering. Wel geldt je eigen risico.</Card>
+          <Card title="Diagnostiek">
+            Een grondig onderzoek naar ADHD, met aandacht voor wat er nog meer kan spelen.
+          </Card>
+          <Card title="Behandeling">
+            Psycho-educatie, coaching en waar passend medicatie, afgestemd op jou.
+          </Card>
+          <Card title="Vergoed">
+            ADHD-zorg valt onder de basisverzekering. Wel geldt je eigen risico.
+          </Card>
         </div>
       </Section>
 
