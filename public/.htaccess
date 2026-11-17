@@ -12,6 +12,9 @@ AddType image/svg+xml .svg
   RewriteEngine On
   RewriteBase /
 
+  # 0. Never redirect Let's Encrypt validation requests (needed for SSL renewal).
+  RewriteRule ^\.well-known/ - [L]
+
   # 1. Force HTTPS (enable SSL in the TransIP control panel first).
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https

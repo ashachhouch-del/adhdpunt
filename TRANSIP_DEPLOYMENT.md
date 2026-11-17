@@ -10,8 +10,8 @@ On a computer with Node.js 22+:
 
 ```sh
 git checkout main
-npm ci                 # or: npm install
-npm run build:transip
+bun install            # or: npm install
+bun run build:transip  # or: npm run build:transip
 ```
 
 `build:transip` builds the site, checks that every page, the sitemap and `.htaccess` are present, and copies everything to **`transip-deploy/`**. If any check fails, the command stops with `FAILED:` and nothing is copied.
