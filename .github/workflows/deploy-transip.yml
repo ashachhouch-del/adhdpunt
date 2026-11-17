@@ -39,11 +39,41 @@ jobs:
       - run: bun run typecheck
       - run: bun run test
       - run: bun run build:transip
+      - name: Test .htaccess and pages on Apache
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq apache2 > /dev/null
+          sudo scripts/verify-apache.sh "$GITHUB_WORKSPACE/transip-deploy"
       - uses: actions/upload-artifact@v4
         with:
           name: transip-deploy
           path: transip-deploy
           include-hidden-files: true
+
+  # Puts the finished website files on the "transip-deploy" branch, so they can be
+  # downloaded as one ZIP from GitHub (branch transip-deploy → Code → Download ZIP).
+  publish:
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: transip-deploy
+          path: transip-deploy
+      - name: Push build to the transip-deploy branch
+        working-directory: transip-deploy
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE: ${{ github.ref_name }}@${{ github.sha }}
+        run: |
+          git init -q -b transip-deploy
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Website build from $SOURCE"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git" transip-deploy
 
   deploy:
     needs: build
