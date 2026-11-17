@@ -4,7 +4,10 @@
 # Usage: sudo scripts/verify-apache.sh /absolute/path/to/transip-deploy
 set -uo pipefail
 
-ROOT="${1:?path to transip-deploy}"
+SRC="${1:?path to transip-deploy}"
+# Copy to a folder Apache can always read (CI home folders are not world-readable).
+ROOT=/var/www/adhdpunt-test
+rm -rf "$ROOT" && mkdir -p "$ROOT" && cp -a "$SRC"/. "$ROOT"/
 PORT=8088
 CONF=/etc/apache2/sites-available/adhdpunt-test.conf
 
