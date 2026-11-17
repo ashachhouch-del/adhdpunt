@@ -40,10 +40,16 @@ function walk(dir) {
 
 if (!existsSync(source)) fail(`${relative(root, source)} not found. Run "vite build" first.`);
 
-const missing = requiredFiles.filter((file) => !existsSync(join(source, file)));
-if (missing.length) fail(`missing in build output: ${missing.join(", ")}`);
-
 const files = walk(source);
+
+const missing = requiredFiles.filter((file) => !existsSync(join(source, file)));
+if (missing.length) {
+  console.error("[prepare-transip] Build output contains:");
+  for (const file of files.filter((f) => !f.includes("/assets/"))) {
+    console.error(`  ${relative(source, file)}`);
+  }
+  fail(`missing in build output: ${missing.join(", ")}`);
+}
 for (const file of files) {
   if (!/\.(html|js|css|xml|txt|json)$/.test(file)) continue;
   const text = readFileSync(file, "utf8");
