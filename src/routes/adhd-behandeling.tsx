@@ -3,7 +3,7 @@ import { Card, CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/adhd-behandeling")({
   staticData: { sitemap: true },
-  head: () => meta("ADHD-behandeling voor volwassenen", "Ontdek de mogelijkheden voor ADHD-behandeling bij ADHD Punt: psycho-educatie, coaching, therapie en waar passend medicatiebegeleiding.", "/adhd-behandeling"),
+  head: () => meta("ADHD-behandeling voor volwassenen", "Ontdek de mogelijkheden voor ADHD-behandeling bij ADHDPunt: psycho-educatie, coaching, therapie en waar passend medicatiebegeleiding.", "/adhd-behandeling"),
   component: Page,
 });
 

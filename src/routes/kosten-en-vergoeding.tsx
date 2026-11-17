@@ -6,7 +6,7 @@ export const Route = createFileRoute("/kosten-en-vergoeding")({
   head: () =>
     meta(
       "Kosten en vergoeding van ADHD-zorg",
-      "Lees hoe de kosten van ADHD-diagnostiek en behandeling bij ADHD Punt zijn opgebouwd: vergoeding vanuit de basisverzekering, onze coulanceregeling, de eenmalige persoonlijke bijdrage van € 250 en het eigen risico.",
+      "Lees hoe de kosten van ADHD-diagnostiek en behandeling bij ADHDPunt zijn opgebouwd: vergoeding vanuit de basisverzekering, onze coulanceregeling, de eenmalige persoonlijke bijdrage van € 250 en het eigen risico.",
       "/kosten-en-vergoeding",
     ),
   component: Page,
@@ -17,7 +17,7 @@ function Page() {
     <>
       <PageHero
         title="Kosten & vergoeding"
-        intro="We vinden het belangrijk dat je vooraf zo goed mogelijk weet waar je financieel aan toe bent. Op deze pagina leggen we uit hoe de kosten bij ADHD Punt zijn opgebouwd, welke rol je zorgverzekering speelt en welke bedragen mogelijk voor je eigen rekening komen."
+        intro="We vinden het belangrijk dat je vooraf zo goed mogelijk weet waar je financieel aan toe bent. Op deze pagina leggen we uit hoe de kosten bij ADHDPunt zijn opgebouwd, welke rol je zorgverzekering speelt en welke bedragen mogelijk voor je eigen rekening komen."
       />
 
       <Section title="Snel weten wat dit voor jou betekent?">
@@ -59,10 +59,10 @@ function Page() {
           <Card title="Je behandeling kan onder de basisverzekering vallen">
             Wanneer aan de voorwaarden voor verzekerde ggz wordt voldaan en je beschikt over een geldige verwijzing, kan je
             zorg vanuit de basisverzekering worden vergoed. Hoe hoog de vergoeding is, hangt onder andere af van je
-            zorgverzekeraar, polis en eventuele afspraken tussen ADHD Punt en je verzekeraar.
+            zorgverzekeraar, polis en eventuele afspraken tussen ADHDPunt en je verzekeraar.
           </Card>
-          <Card title="ADHD Punt levert ongecontracteerde zorg">
-            Omdat ADHD Punt geen overeenkomst heeft met je zorgverzekeraar, kan je behandeling toch voor vergoeding in
+          <Card title="ADHDPunt levert ongecontracteerde zorg">
+            Omdat ADHDPunt geen overeenkomst heeft met je zorgverzekeraar, kan je behandeling toch voor vergoeding in
             aanmerking komen. De hoogte van die vergoeding is afhankelijk van je polisvoorwaarden.{" "}
             <strong className="text-foreground">Op dit moment nemen wij de kosten van niet-vergoede zorg op ons.</strong>{" "}
             Wanneer je aan de voorwaarden van onze coulanceregeling voldoet, nemen wij het deel dat je verzekeraar niet
@@ -95,7 +95,7 @@ function Page() {
           <li className="flex justify-between gap-4 border-b pb-2"><span>Totale geregistreerde zorgkosten</span><strong className="text-primary">± € 6.000</strong></li>
           <li className="flex justify-between gap-4 border-b pb-2"><span>Vergoeding zorgverzekeraar bij 60%</span><strong className="text-primary">± € 3.600</strong></li>
           <li className="flex justify-between gap-4 border-b pb-2"><span>Niet-vergoed gedeelte</span><strong className="text-primary">± € 2.400</strong></li>
-          <li className="flex justify-between gap-4 border-b pb-2"><span>Persoonlijke bijdrage aan ADHD Punt</span><strong className="text-primary">€ 250</strong></li>
+          <li className="flex justify-between gap-4 border-b pb-2"><span>Persoonlijke bijdrage aan ADHDPunt</span><strong className="text-primary">€ 250</strong></li>
           <li className="flex justify-between gap-4 border-b pb-2"><span>Eventueel nog openstaand eigen risico</span><strong className="text-primary">voor je eigen rekening</strong></li>
         </ul>
         <p className="mt-4 text-muted-foreground">
@@ -131,7 +131,7 @@ function Page() {
 
       <Section title="Hoe verloopt de betaling?">
         <p className="text-muted-foreground">
-          Voor de facturatie werkt ADHD Punt samen met Infomedics. Je ontvangt een factuur voor de geleverde zorg, die je
+          Voor de facturatie werkt ADHDPunt samen met Infomedics. Je ontvangt een factuur voor de geleverde zorg, die je
           eerst declareert bij je eigen zorgverzekeraar. Belangrijk om te weten: de factuur is niet hetzelfde als het
           bedrag dat je zelf betaalt. Op de factuur staat het volledige bedrag van de geleverde zorg. Dat bedrag kan
           aanzienlijk hoger zijn dan de vergoeding die je uiteindelijk van je zorgverzekeraar ontvangt. Dit verschil hoef
@@ -140,11 +140,11 @@ function Page() {
         </p>
         <ol className="mt-6 space-y-4">
           {[
-            ["Je ontvangt de factuur", "Infomedics stuurt namens ADHD Punt de factuur voor de geleverde zorg."],
+            ["Je ontvangt de factuur", "Infomedics stuurt namens ADHDPunt de factuur voor de geleverde zorg."],
             ["Je declareert bij je zorgverzekeraar", "Je dient de volledige factuur zelf in bij je zorgverzekeraar, bijvoorbeeld via de app of het online portaal van je verzekeraar."],
             ["Je zorgverzekeraar bepaalt de vergoeding", "Je zorgverzekeraar beoordeelt de declaratie. De vergoeding is afhankelijk van je polis en kan lager zijn dan het bedrag op de factuur."],
-            ["Je ontvangt de vergoeding", "Je zorgverzekeraar betaalt het bedrag waarop je volgens je polis recht hebt aan je uit. Stuur het vergoedingenoverzicht vervolgens door volgens de instructies van ADHD Punt en Infomedics."],
-            ["Het verschil nemen wij voor onze rekening", "Is de vergoeding van je zorgverzekeraar lager dan de factuur? Dan hoef je dat verschil niet zelf bij te betalen wanneer de coulanceregeling op jouw situatie van toepassing is. ADHD Punt neemt dat gedeelte voor eigen rekening."],
+            ["Je ontvangt de vergoeding", "Je zorgverzekeraar betaalt het bedrag waarop je volgens je polis recht hebt aan je uit. Stuur het vergoedingenoverzicht vervolgens door volgens de instructies van ADHDPunt en Infomedics."],
+            ["Het verschil nemen wij voor onze rekening", "Is de vergoeding van je zorgverzekeraar lager dan de factuur? Dan hoef je dat verschil niet zelf bij te betalen wanneer de coulanceregeling op jouw situatie van toepassing is. ADHDPunt neemt dat gedeelte voor eigen rekening."],
           ].map(([t, d], i) => (
             <li key={t} className="flex gap-4">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent font-bold text-accent-foreground">{i + 1}</span>
@@ -162,7 +162,7 @@ function Page() {
           <p>
             Voor verzekerden van 18 jaar en ouder geldt een wettelijk verplicht eigen risico voor zorg uit de
             basisverzekering. Dit bedrag wordt door je zorgverzekeraar met je verrekend en staat los van de
-            coulanceregeling van ADHD Punt.
+            coulanceregeling van ADHDPunt.
           </p>
           <p>
             <strong className="text-foreground">Verplicht eigen risico.</strong> De overheid bepaalt jaarlijks de hoogte
@@ -187,7 +187,7 @@ function Page() {
       <Section title="Vooraf duidelijkheid">
         <p className="text-muted-foreground">Wij adviseren om vóór de start van je traject drie zaken te controleren:</p>
         <ol className="mt-4 list-decimal space-y-2 pl-6 font-medium text-primary">
-          <li>Welke vergoeding geldt binnen mijn polis voor gespecialiseerde ggz bij ADHD Punt?</li>
+          <li>Welke vergoeding geldt binnen mijn polis voor gespecialiseerde ggz bij ADHDPunt?</li>
           <li>Hoeveel eigen risico heb ik dit kalenderjaar nog openstaan?</li>
           <li>Is vooraf toestemming of een machtiging van mijn zorgverzekeraar nodig?</li>
         </ol>

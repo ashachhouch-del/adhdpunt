@@ -4,7 +4,7 @@ import { PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/aanmelden")({
   staticData: { sitemap: true },
-  head: () => meta("Aanmelden voor ADHD-diagnostiek en behandeling", "Lees hoe je je aanmeldt bij ADHD Punt, welke verwijzing je nodig hebt en voor wie onze ADHD-zorg voor volwassenen passend is.", "/aanmelden"),
+  head: () => meta("Aanmelden voor ADHD-diagnostiek en behandeling", "Lees hoe je je aanmeldt bij ADHDPunt, welke verwijzing je nodig hebt en voor wie onze ADHD-zorg voor volwassenen passend is.", "/aanmelden"),
   component: Page,
 });
 
@@ -27,12 +27,12 @@ function Page() {
 
   return (
     <>
-      <PageHero title="Direct aanmelden" intro="ADHD Punt is gespecialiseerd in diagnostiek en behandeling van ADHD bij volwassenen. Hieronder lees je hoe aanmelden werkt, voor jezelf of als verwijzer." />
+      <PageHero title="Direct aanmelden" intro="ADHDPunt is gespecialiseerd in diagnostiek en behandeling van ADHD bij volwassenen. Hieronder lees je hoe aanmelden werkt, voor jezelf of als verwijzer." />
       <Section title="Zo meld je je aan">
         <ol className="space-y-3">
           {[
             "Bespreek je klachten met je huisarts.",
-            "Vindt je huisarts een verwijzing passend? Dan stuurt hij of zij een verwijsbrief naar ADHD Punt.",
+            "Vindt je huisarts een verwijzing passend? Dan stuurt hij of zij een verwijsbrief naar ADHDPunt.",
             "Na ontvangst van de verwijzing nemen we contact met je op om een intakegesprek te plannen.",
           ].map((s, i) => (
             <li key={s} className="flex gap-4">

@@ -30,3 +30,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Generated deployment folder (rebuild with: npm run build:transip)
+transip-deploy/

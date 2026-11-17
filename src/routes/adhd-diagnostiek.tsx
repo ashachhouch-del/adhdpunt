@@ -3,7 +3,7 @@ import { Card, CtaBand, PageHero, Section, meta } from "@/components/site";
 
 export const Route = createFileRoute("/adhd-diagnostiek")({
   staticData: { sitemap: true },
-  head: () => meta("ADHD-onderzoek en diagnostiek bij volwassenen", "Hoe verloopt ADHD-onderzoek bij volwassenen? Lees over de intake, vragenlijsten, het diagnostisch interview en het adviesgesprek bij ADHD Punt.", "/adhd-diagnostiek"),
+  head: () => meta("ADHD-onderzoek en diagnostiek bij volwassenen", "Hoe verloopt ADHD-onderzoek bij volwassenen? Lees over de intake, vragenlijsten, het diagnostisch interview en het adviesgesprek bij ADHDPunt.", "/adhd-diagnostiek"),
   component: Page,
 });
 

@@ -6,7 +6,7 @@ export const WACHTTIJD_DAGEN = 14;
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
-  head: () => meta("ADHD-diagnostiek en behandeling voor volwassenen", "ADHD Punt biedt persoonlijke ADHD-diagnostiek en behandeling voor volwassenen. Lees over het onderzoek, de zorg, aanmelden en kosten.", "/"),
+  head: () => meta("ADHD-diagnostiek en behandeling voor volwassenen", "ADHDPunt biedt persoonlijke ADHD-diagnostiek en behandeling voor volwassenen. Lees over het onderzoek, de zorg, aanmelden en kosten.", "/"),
   component: Index,
 });
 
@@ -62,7 +62,7 @@ function Index() {
             Duidelijkheid over ADHD, in jouw tempo.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Loop je vast met concentratie, planning of onrust? Bij ADHD Punt krijg je een zorgvuldig onderzoek en
+            Loop je vast met concentratie, planning of onrust? Bij ADHDPunt krijg je een zorgvuldig onderzoek en
             persoonlijke begeleiding door ervaren specialisten.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">

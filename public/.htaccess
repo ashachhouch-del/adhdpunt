@@ -1,0 +1,62 @@
+# ADHDPunt – Apache configuration for TransIP webhosting (static prerendered site)
+# Every public page exists as a prerendered file: /contact -> contact.html, / -> index.html.
+# Unknown URLs get HTTP 404 with the client-side app shell (_shell.html), which renders the 404 page.
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+AddType application/xml .xml
+AddType image/svg+xml .svg
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Force HTTPS (enable SSL in the TransIP control panel first).
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. www.adhdpunt.nl -> adhdpunt.nl (canonical URLs in the HTML use https://adhdpunt.nl).
+  RewriteCond %{HTTP_HOST} ^www\.adhdpunt\.nl$ [NC]
+  RewriteRule ^ https://adhdpunt.nl%{REQUEST_URI} [L,R=301]
+
+  # 3. Clean URLs: /index.html -> /, /contact.html -> /contact (only for direct client requests).
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [L,R=301]
+  RewriteCond %{THE_REQUEST} \s/([^\s?]+)\.html[\s?] [NC]
+  RewriteCond %1 !^_shell$
+  RewriteRule ^ /%1 [L,R=301]
+
+  # 4. Remove trailing slash from page URLs (/contact/ -> /contact), not from real folders.
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+  # 5. Serve the prerendered page for clean URLs (works for nested routes too: /a/b -> a/b.html).
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+</IfModule>
+
+# 6. SPA fallback: anything else is a 404 rendered by the app (keeps the real 404 status for SEO).
+ErrorDocument 404 /_shell.html
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Hashed build assets never change: cache for one year.
+  <FilesMatch "^.+-[A-Za-z0-9_-]{8,}\.(js|css|woff2?|png|jpe?g|webp|avif|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # HTML, sitemap and robots must always be revalidated so new deploys show up immediately.
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>

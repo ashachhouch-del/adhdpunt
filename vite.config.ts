@@ -1,15 +1,42 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
-//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
-//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+// Standalone Vite configuration for ADHDPunt (no Lovable tooling).
+//
+// The site is built as fully static files for Apache webhosting (TransIP):
+//   - every public route is prerendered to its own HTML file (SEO tags included),
+//   - /sitemap.xml is prerendered from the router,
+//   - /_shell.html is the client-side fallback used for unknown URLs (404).
+// Output: dist/client  →  copied to transip-deploy/ by scripts/prepare-transip.mjs
+import { defineConfig } from "vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+  server: { port: 8080 },
+  resolve: {
+    dedupe: ["react", "react-dom", "@tanstack/react-router", "@tanstack/react-query"],
   },
+  plugins: [
+    tsConfigPaths({ projects: ["./tsconfig.json"] }),
+    tailwindcss(),
+    tanstackStart({
+      // src/server.ts wraps the TanStack Start server entry (used during prerendering).
+      server: { entry: "server" },
+      // Client-side shell for URLs that have no prerendered page (served with HTTP 404 by .htaccess).
+      spa: { enabled: true },
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+        // /contact -> contact.html (served at /contact without trailing slash by .htaccess)
+        autoSubfolderIndex: false,
+        failOnError: true,
+      },
+      pages: [
+        // Not linked from any page (reached after submitting the form), so list it explicitly.
+        { path: "/bedankt", prerender: { enabled: true } },
+        { path: "/sitemap.xml", prerender: { enabled: true, crawlLinks: false } },
+      ],
+    }),
+    viteReact(),
+  ],
 });
