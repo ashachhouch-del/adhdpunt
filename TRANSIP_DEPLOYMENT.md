@@ -4,9 +4,17 @@ The website is a set of **static files**. TransIP webhosting (Apache) serves the
 
 ---
 
-## 1. Build the upload folder
+## 1. Get the upload folder
 
-On a computer with Node.js 22+:
+**Easiest way (no installation needed):** GitHub builds the website automatically after every change. The finished files are on the branch **`transip-deploy`**:
+
+1. Open https://github.com/ashachhouch-del/adhdpunt/tree/transip-deploy
+2. Click the green **Code** button → **Download ZIP**.
+3. Unzip it. The files inside are exactly what goes into `www/` on TransIP.
+
+The branch's latest commit message says which code version it was built from. A build only appears there if lint, typecheck, tests, the build and the Apache checks all passed.
+
+**Or build it yourself**, on a computer with Node.js 22+:
 
 ```sh
 git checkout main

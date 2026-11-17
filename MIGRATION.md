@@ -94,27 +94,27 @@ The ZIP export had no Git history, so `87ad6c3` is a fresh snapshot of the expor
 
 `vite build` prerenders every page to HTML. `.htaccess` maps clean URLs to those files: `/contact` serves `contact.html`, and a direct visit or a refresh on any route returns the complete page with HTTP 200. Unknown URLs return **HTTP 404** with `_shell.html`; the app then loads and shows its 404 screen. After loading, navigation is client-side, as before.
 
-## 5. Verification done in this session
+## 5. Verification
 
-| Check | Result |
+All checks run automatically on GitHub Actions for every push (`.github/workflows/deploy-transip.yml`).
+
+| Check | Result (17 Nov 2026, branch `migration/remove-lovable-transip`) |
 | --- | --- |
-| Syntax of all `src` TS/TSX files and `vite.config.ts` (esbuild parse) | pass |
-| Prettier check on `src/**/*.{ts,tsx}` | pass (was failing on 14 files) |
-| Compiled output identical before/after formatting | pass |
-| `scripts/prepare-transip.mjs` against a mock build: success, missing page, missing canonical, "lovable" string, "ADHD Punt" string | all behave as intended |
-| Workflow YAML parses | pass |
-| `bun.lock` still parses | pass |
-| No "lovable" left in code or config (only in docs and the guard script) | pass |
-| **`vite build`, `eslint`, `tsc`, `vitest`, dev server, browser checks of routes, links, form, mobile, console** | **NOT RUN.** Package registry blocked. Must be run once with network access (see TRANSIP_DEPLOYMENT.md §1 and §6). |
-| `.htaccess` on Apache | **NOT RUN** (no Apache available). Test on TransIP with the checklist in TRANSIP_DEPLOYMENT.md §6. |
+| `bun install` (with `bun.lock`) | pass |
+| `bun run lint` (ESLint + Prettier) | pass. Before the migration, 14 files failed Prettier. |
+| `bun run typecheck` (tsc) | pass |
+| `bun run test` (Vitest, 2 files, 4 tests) | pass |
+| `bun run build:transip` | pass. 12 pages prerendered: 10 pages, `sitemap.xml`, `_shell.html` |
+| Apache test of `.htaccess` (`scripts/verify-apache.sh`, real Apache 2.4 with mod_rewrite) | 44/44 pass: all routes 200, http→https, www→apex, `/x/`→`/x`, `/x.html`→`/x`, `/index.html`→`/`, unknown and nested URLs 404 with app shell, Let's Encrypt path not redirected, all 15 assets 200, assets cached as immutable |
+| Browser test (headless Chromium on the built files) | 32/32 pass: direct visit/refresh of all 10 pages, all header and footer links, logo text "ADHDPunt", form validation messages, valid form → `/bedankt`, unknown URL shows the 404 screen, mobile (390 px): menu button, menu links, sticky "Direct aanmelden" bar, no horizontal scroll, no console errors on any page |
+| Formatting changed nothing in the compiled code | pass (esbuild output compared) |
 
-### First build: what to check
+Not verified: the live site on TransIP (not deployed yet), and the Google Fonts request (blocked in the test sandbox, unchanged from before).
 
-The prerender settings (`spa`, `prerender`, `pages`) follow the TanStack Start documentation, but this exact configuration has not been executed. `bun run build:transip` stops with a clear `FAILED:` message if the output is incomplete. If the build fails:
+### Fixes found by these tests
 
-1. **"missing in build output: _shell.html"**: TanStack Start may name the shell differently in this version. Look for the generated shell in `dist/client` and update `requiredFiles` and the `ErrorDocument` line in `.htaccess` to match.
-2. **"sitemap.xml missing"**: the server route was not prerendered. Check that `pages` in `vite.config.ts` contains `/sitemap.xml`.
-3. **Output in `.output/public` instead of `dist/client`**: a Nitro plugin is still active. Make sure `nitro` is no longer installed (`bun install` after pulling this branch).
+- With SPA mode on, the homepage was replaced by the app shell (TanStack de-duplicates prerender pages by path). Fixed with `spa.maskPath: "/?spa-shell"`, and `/` is now listed explicitly.
+- Three `.htaccess` redirects pointed to `http://` instead of `https://`, and the 404 error document could trigger a redirect. Fixed with absolute `https://` targets and a `REDIRECT_STATUS` guard.
 
 ## 6. Product goal (preserved from `.lovable/north-star`)
 
