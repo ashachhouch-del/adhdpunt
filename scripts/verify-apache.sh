@@ -83,7 +83,8 @@ assets=$(grep -ohE '/assets/[A-Za-z0-9._-]+' "$ROOT"/*.html | sort -u)
 echo "Assets referenced by pages: $(echo "$assets" | grep -c .)"
 if [[ -z "$assets" ]]; then
   echo "FAIL  no /assets/ references found in pages"; fails=$((fails + 1))
-  grep -ohE '(src|href)="[^"]+"' "$ROOT/index.html" | head -20
+  echo "DEBUG files:"; (cd "$ROOT" && find . -type f | sort | head -60)
+  echo "DEBUG index.html head:"; head -c 2500 "$ROOT/index.html"; echo
 fi
 for asset in $assets; do
   check "asset $asset" 200 - "$asset"
