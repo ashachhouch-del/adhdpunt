@@ -1,7 +1,7 @@
 # Build ADHDPunt and (optionally) deploy the static site to TransIP webhosting over SFTP.
 #
 # - Every push / pull request: install, lint, typecheck, test, build (no deploy).
-# - Deploy: only on manual run ("Run workflow" in the Actions tab) on branch main,
+# - Deploy: only on manual run ("Run workflow" in the Actions tab) on main or the migration branch,
 #   and only when these repository secrets exist (Settings → Secrets and variables → Actions):
 #     TRANSIP_SFTP_HOST      host shown in TransIP control panel → Site → SFTP/SSH
 #     TRANSIP_SFTP_PORT      22 (or 2222 if 22 does not work)
@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       deploy:
-        description: "Upload transip-deploy/ to TransIP (main branch only)"
+        description: "Upload the website to TransIP"
         type: boolean
         default: false
 
@@ -77,7 +77,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/migration/remove-lovable-transip')
     runs-on: ubuntu-latest
     environment: production
     steps:
