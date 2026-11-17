@@ -49,7 +49,7 @@ check() {
 
 # body_has <description> <path> <text>
 body_has() {
-  if curl -s -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE$2" | grep -qF "$3"; then
+  if curl -s -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE$2" | grep -aqF "$3"; then
     echo "PASS  $1"
   else
     echo "FAIL  $1  (\"$3\" not found)"
@@ -79,7 +79,7 @@ body_has "404 serves app shell" /bestaat-niet "<script"
 body_has "sitemap lists contact" /sitemap.xml "<loc>https://adhdpunt.nl/contact</loc>"
 
 # Every asset referenced by the pages must exist.
-assets=$(grep -ohE '/assets/[A-Za-z0-9._-]+' "$ROOT"/*.html | sort -u)
+assets=$(LC_ALL=C grep -aohE '/assets/[A-Za-z0-9._-]+' "$ROOT"/*.html | sort -u)
 echo "Assets referenced by pages: $(echo "$assets" | grep -c .)"
 if [[ -z "$assets" ]]; then
   echo "FAIL  no /assets/ references found in pages"; fails=$((fails + 1))
