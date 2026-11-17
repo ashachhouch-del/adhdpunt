@@ -1,0 +1,74 @@
+# Build ADHDPunt and (optionally) deploy the static site to TransIP webhosting over SFTP.
+#
+# - Every push / pull request: install, lint, typecheck, test, build (no deploy).
+# - Deploy: only on manual run ("Run workflow" in the Actions tab) on branch main,
+#   and only when these repository secrets exist (Settings → Secrets and variables → Actions):
+#     TRANSIP_SFTP_HOST      host shown in TransIP control panel → Site → SFTP/SSH
+#     TRANSIP_SFTP_PORT      22 (or 2222 if 22 does not work)
+#     TRANSIP_SFTP_USER      SFTP/SSH username
+#     TRANSIP_SFTP_PASSWORD  SFTP/SSH password
+#     TRANSIP_SFTP_PATH      remote web root, normally: www
+name: Build and deploy (TransIP)
+
+on:
+  push:
+    branches: [main, "migration/**"]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Upload transip-deploy/ to TransIP (main branch only)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: oven-sh/setup-bun@v2
+      # bun.lock pins the exact dependency versions the site was built with.
+      - run: bun install
+      - run: bun run lint
+      - run: bun run typecheck
+      - run: bun run test
+      - run: bun run build:transip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: transip-deploy
+          path: transip-deploy
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: transip-deploy
+          path: transip-deploy
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Upload to TransIP over SFTP
+        env:
+          HOST: ${{ secrets.TRANSIP_SFTP_HOST }}
+          PORT: ${{ secrets.TRANSIP_SFTP_PORT }}
+          USER: ${{ secrets.TRANSIP_SFTP_USER }}
+          PASS: ${{ secrets.TRANSIP_SFTP_PASSWORD }}
+          REMOTE: ${{ secrets.TRANSIP_SFTP_PATH }}
+        run: |
+          test -n "$HOST" && test -n "$USER" && test -n "$PASS" && test -n "$REMOTE" || { echo "TransIP secrets missing"; exit 1; }
+          test -f transip-deploy/.htaccess || { echo ".htaccess missing from artifact"; exit 1; }
+          lftp -u "$USER","$PASS" -p "${PORT:-22}" "sftp://$HOST" -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            mirror --reverse --delete --verbose --exclude-glob .well-known/ transip-deploy/ $REMOTE/;
+            quit"
