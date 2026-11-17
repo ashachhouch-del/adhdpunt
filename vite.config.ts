@@ -23,7 +23,9 @@ export default defineConfig({
       // src/server.ts wraps the TanStack Start server entry (used during prerendering).
       server: { entry: "server" },
       // Client-side shell for URLs that have no prerendered page (served with HTTP 404 by .htaccess).
-      spa: { enabled: true },
+      // maskPath gets a query string so the shell does not replace the real "/" page
+      // (TanStack prerender de-duplicates pages by path). Output: /_shell.html
+      spa: { enabled: true, maskPath: "/?spa-shell" },
       prerender: {
         enabled: true,
         crawlLinks: true,
@@ -32,6 +34,7 @@ export default defineConfig({
         failOnError: true,
       },
       pages: [
+        { path: "/", prerender: { enabled: true } },
         // Not linked from any page (reached after submitting the form), so list it explicitly.
         { path: "/bedankt", prerender: { enabled: true } },
         { path: "/sitemap.xml", prerender: { enabled: true, crawlLinks: false } },
