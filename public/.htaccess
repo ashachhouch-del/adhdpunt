@@ -15,26 +15,30 @@ AddType image/svg+xml .svg
   # 0. Never redirect Let's Encrypt validation requests (needed for SSL renewal).
   RewriteRule ^\.well-known/ - [L]
 
+  # External redirects below skip internal sub-requests (e.g. the 404 error document): REDIRECT_STATUS.
   # 1. Force HTTPS (enable SSL in the TransIP control panel first).
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # 2. www.adhdpunt.nl -> adhdpunt.nl (canonical URLs in the HTML use https://adhdpunt.nl).
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
   RewriteCond %{HTTP_HOST} ^www\.adhdpunt\.nl$ [NC]
   RewriteRule ^ https://adhdpunt.nl%{REQUEST_URI} [L,R=301]
 
   # 3. Clean URLs: /index.html -> /, /contact.html -> /contact (only for direct client requests).
   RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
-  RewriteRule ^index\.html$ / [L,R=301]
+  RewriteRule ^index\.html$ https://%{HTTP_HOST}/ [L,R=301]
   # (%1 comes from the last condition, so the capturing condition must stay last.)
   RewriteCond %{REQUEST_URI} !^/_shell\.html$
   RewriteCond %{THE_REQUEST} \s/([^\s?]+)\.html[\s?] [NC]
-  RewriteRule ^ /%1 [L,R=301]
+  RewriteRule ^ https://%{HTTP_HOST}/%1 [L,R=301]
 
   # 4. Remove trailing slash from page URLs (/contact/ -> /contact), not from real folders.
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.+)/$ /$1 [L,R=301]
+  RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [L,R=301]
 
   # 5. Serve the prerendered page for clean URLs (works for nested routes too: /a/b -> a/b.html).
   RewriteCond %{REQUEST_FILENAME} !-f

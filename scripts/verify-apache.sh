@@ -79,9 +79,21 @@ body_has "404 serves app shell" /bestaat-niet "<script"
 body_has "sitemap lists contact" /sitemap.xml "<loc>https://adhdpunt.nl/contact</loc>"
 
 # Every asset referenced by the pages must exist.
-for asset in $(grep -ohE '/assets/[^"'"'"' )]+' "$ROOT"/*.html | sort -u); do
+assets=$(grep -ohE '/assets/[A-Za-z0-9._-]+' "$ROOT"/*.html | sort -u)
+echo "Assets referenced by pages: $(echo "$assets" | grep -c .)"
+if [[ -z "$assets" ]]; then
+  echo "FAIL  no /assets/ references found in pages"; fails=$((fails + 1))
+  grep -ohE '(src|href)="[^"]+"' "$ROOT/index.html" | head -20
+fi
+for asset in $assets; do
   check "asset $asset" 200 - "$asset"
 done
+check "hashed asset is cached 1 year" 200 - "$(echo "$assets" | grep '\.js$' | head -1)"
+if curl -sI -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE$(echo "$assets" | grep '\.js$' | head -1)" | grep -qi 'immutable'; then
+  echo "PASS  asset Cache-Control immutable"
+else
+  echo "FAIL  asset Cache-Control immutable missing"; fails=$((fails + 1))
+fi
 
 echo
 if (( fails > 0 )); then echo "$fails check(s) FAILED"; exit 1; fi
