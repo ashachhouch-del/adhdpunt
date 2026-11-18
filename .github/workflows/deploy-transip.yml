@@ -102,6 +102,9 @@ jobs:
         run: |
           test -n "$HOST" && test -n "$USER" && test -n "$PASS" && test -n "$REMOTE" || { echo "TransIP secrets missing"; exit 1; }
           test -f transip-deploy/.htaccess || { echo ".htaccess missing from artifact"; exit 1; }
+          # TransIP's web root is always lowercase "www" (a "WWW" folder would not be served).
+          REMOTE="${REMOTE,,}"
+          echo "Uploading to: $REMOTE/"
           lftp -u "$USER","$PASS" -p "${PORT:-22}" "sftp://$HOST" -e "
             set sftp:auto-confirm yes;
             set net:max-retries 2;
