@@ -7,6 +7,8 @@ BUILD="${1:-}"
 fails=0
 
 echo "== DNS"
+echo "nameservers: $(dig +short NS adhdpunt.nl | tr '\n' ' ')"
+whois adhdpunt.nl 2>/dev/null | grep -iE -A3 "registrar|reseller" | head -12 || true
 for h in adhdpunt.nl www.adhdpunt.nl; do
   echo "$h -> A: $(dig +short A "$h" | tr '\n' ' ') CNAME: $(dig +short CNAME "$h" | tr '\n' ' ')"
 done

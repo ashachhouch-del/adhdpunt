@@ -122,4 +122,5 @@ jobs:
         with:
           name: transip-deploy
           path: transip-deploy
+      - run: sudo apt-get install -y -qq whois > /dev/null || true
       - run: scripts/verify-live.sh transip-deploy
