@@ -107,3 +107,19 @@ jobs:
             set net:max-retries 2;
             mirror --reverse --delete --verbose --exclude-glob .well-known/ transip-deploy/ $REMOTE/;
             quit"
+
+  # Checks the live site (https://adhdpunt.nl) after a deploy, or on a push with [check-live].
+  live-check:
+    needs: [build, deploy]
+    if: >-
+      !cancelled() && needs.build.result == 'success' && needs.deploy.result != 'failure' &&
+      github.event_name == 'push' &&
+      (contains(github.event.head_commit.message, '[deploy]') || contains(github.event.head_commit.message, '[check-live]'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: transip-deploy
+          path: transip-deploy
+      - run: scripts/verify-live.sh transip-deploy
