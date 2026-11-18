@@ -124,3 +124,24 @@ jobs:
           path: transip-deploy
       - run: sudo apt-get install -y -qq whois > /dev/null || true
       - run: scripts/verify-live.sh transip-deploy
+
+  # Read-only look at the folders on TransIP (push with [ls-remote] in the commit message).
+  ls-remote:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[ls-remote]')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: List folders on TransIP
+        env:
+          HOST: ${{ secrets.TRANSIP_SFTP_HOST }}
+          PORT: ${{ secrets.TRANSIP_SFTP_PORT }}
+          USER: ${{ secrets.TRANSIP_SFTP_USER }}
+          PASS: ${{ secrets.TRANSIP_SFTP_PASSWORD }}
+        run: |
+          lftp -u "$USER","$PASS" -p "${PORT:-22}" "sftp://$HOST" -e "
+            set sftp:auto-confirm yes;
+            pwd; echo '--- home'; cls -la;
+            echo '--- find (depth 3, no assets)'; find -d 3 . ;
+            quit" | grep -v '/assets/'
