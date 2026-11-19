@@ -147,10 +147,11 @@ export function BrandArc() {
   return (
     <span
       aria-hidden
-      className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 lg:block"
+      className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 xl:block"
     >
       <span className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary" />
-      <span className="absolute top-44 right-40 h-5 w-5 rounded-full bg-accent" />
+      {/* coral endpoint dot sits on the circle edge, like the dot in the logo */}
+      <span className="absolute top-[138px] right-[138px] h-6 w-6 rounded-full bg-accent" />
     </span>
   );
 }
@@ -233,7 +234,7 @@ export function Logo({ inverse }: { inverse?: boolean }) {
   return (
     <svg
       viewBox="0 0 430 120"
-      className="h-10 w-auto"
+      className="h-10 w-auto md:h-12"
       role="img"
       aria-label="ADHDPunt"
       xmlns="http://www.w3.org/2000/svg"
