@@ -54,6 +54,8 @@ if [[ -n "$BUILD" ]]; then
     [[ -e "$q" ]] || continue
     check "questionnaire (unlisted)" 200 - "$SITE/$(basename "$q" .html)"
     check "questionnaire font (self-hosted)" 200 - "$SITE/fonts/manrope-latin.woff"
+    check "short address /vzah" 200 - "$SITE/vzah"
+    check "www.adhdpunt.nl/vzah -> adhdpunt.nl/vzah" 301 "https://adhdpunt.nl/vzah" "https://www.adhdpunt.nl/vzah"
   done
 fi
 cert=$(echo | openssl s_client -connect adhdpunt.nl:443 -servername adhdpunt.nl 2>/dev/null | openssl x509 -noout -issuer -enddate 2>/dev/null | tr '\n' ' ')

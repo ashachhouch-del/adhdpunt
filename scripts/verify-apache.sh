@@ -84,6 +84,15 @@ for q in "$ROOT"/vragenlijst-*.html; do
   name=$(basename "$q" .html)
   check "questionnaire /$name" 200 - "/$name"
   check "questionnaire font" 200 - "/fonts/manrope-latin.woff"
+  check "short address /vzah" 200 - "/vzah"
+  check "short address /vzah/ -> /vzah" 301 "https://adhdpunt.nl/vzah" "/vzah/"
+  check "www short address -> apex" 301 "https://adhdpunt.nl/vzah" "/vzah" www.adhdpunt.nl
+  body_has "/vzah shows the questionnaire" /vzah "Vragenlijst aandacht en hyperactiviteit"
+  if curl -sI -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE/vzah" | grep -qi '^x-robots-tag: noindex'; then
+    echo "PASS  /vzah has X-Robots-Tag noindex"
+  else
+    echo "FAIL  /vzah X-Robots-Tag missing"; fails=$((fails + 1))
+  fi
   if curl -sI -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE/$name" | grep -qi '^x-robots-tag: noindex'; then
     echo "PASS  questionnaire has X-Robots-Tag noindex"
   else

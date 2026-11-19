@@ -41,6 +41,10 @@ AddType font/woff .woff
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [L,R=301]
 
+  # 4b. Short address for the patient questionnaire: /vzah shows the same page as the unlisted
+  #     questionnaire URL (the address bar keeps /vzah). Both addresses keep working.
+  RewriteRule ^vzah$ vragenlijst-2ygyerc2.html [L,NC]
+
   # 5. Serve the prerendered page for clean URLs (works for nested routes too: /a/b -> a/b.html).
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
