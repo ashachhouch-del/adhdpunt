@@ -49,6 +49,12 @@ if [[ -n "$BUILD" ]]; then
     fails=$((fails + 1))
   fi
 fi
+if [[ -n "$BUILD" ]]; then
+  for q in "$BUILD"/vragenlijst-*.html; do
+    [[ -e "$q" ]] || continue
+    check "questionnaire (unlisted)" 200 - "$SITE/$(basename "$q" .html)"
+  done
+fi
 cert=$(echo | openssl s_client -connect adhdpunt.nl:443 -servername adhdpunt.nl 2>/dev/null | openssl x509 -noout -issuer -enddate 2>/dev/null | tr '\n' ' ')
 echo "INFO  SSL certificate: ${cert:-none}"
 

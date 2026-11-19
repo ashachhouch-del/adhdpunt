@@ -78,6 +78,23 @@ body_has "bedankt is noindex" /bedankt 'content="noindex"'
 body_has "404 serves app shell" /bestaat-niet "<script"
 body_has "sitemap lists contact" /sitemap.xml "<loc>https://adhdpunt.nl/contact</loc>"
 
+# Unlisted questionnaires: reachable, never indexed, not in the sitemap, not linked from any page.
+for q in "$ROOT"/vragenlijst-*.html; do
+  [[ -e "$q" ]] || continue
+  name=$(basename "$q" .html)
+  check "questionnaire /$name" 200 - "/$name"
+  if curl -sI -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE/$name" | grep -qi '^x-robots-tag: noindex'; then
+    echo "PASS  questionnaire has X-Robots-Tag noindex"
+  else
+    echo "FAIL  questionnaire X-Robots-Tag missing"; fails=$((fails + 1))
+  fi
+  if LC_ALL=C grep -alq "$name" "$ROOT"/sitemap.xml "$ROOT"/robots.txt $(ls "$ROOT"/*.html | grep -v vragenlijst-) "$ROOT"/assets/*; then
+    echo "FAIL  questionnaire address appears in sitemap, robots.txt or another page"; fails=$((fails + 1))
+  else
+    echo "PASS  questionnaire address is not linked or listed anywhere"
+  fi
+done
+
 # Every asset referenced by the pages must exist.
 assets=$(LC_ALL=C grep -aohE '/assets/[A-Za-z0-9._-]+' "$ROOT"/*.html | sort -u)
 echo "Assets referenced by pages: $(echo "$assets" | grep -c .)"
