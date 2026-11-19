@@ -6,50 +6,64 @@
 <meta name="robots" content="noindex,nofollow">
 <title>ADHD Vragenlijst</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2430;--muted:#5c6675;--line:#dfe3ea;--accent:#1f5f8b;--accent-soft:#e7f0f7;--err:#b3261e;--ok:#1e7a46}
+/* ADHDPunt huisstijl: Deep Green #214F42, Forest Depth #173D34, Punt Coral #F39B83 (accent only),
+   Soft Sage #E8EFEB, Warm White #FAF9F5, Charcoal Green #263B35. 8-pt spacing, radius 8–16 px. */
+:root{--bg:#FAF9F5;--card:#fff;--ink:#263B35;--muted:#52665F;--line:#D6E0DA;--accent:#214F42;--accent-dark:#173D34;--accent-soft:#E8EFEB;--coral:#F39B83;--err:#B3261E;--ok:#214F42}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,Aptos,"Segoe UI",Arial,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,sans-serif}
 .wrap{max-width:760px;margin:0 auto;padding:24px 16px 80px}
-header h1{font-size:1.5rem;margin:0 0 4px}
-header p{color:var(--muted);margin:0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:20px}
-.card h2{font-size:1.15rem;margin:0 0 6px}
-.card .intro{color:var(--muted);margin:0 0 14px;font-size:.95rem}
-.privacy{background:var(--accent-soft);border-color:#c9dcea;font-size:.92rem}
-label.f{display:block;font-weight:600;margin:12px 0 4px;font-size:.95rem}
-input[type=text],input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+header.brandbar{position:relative;overflow:hidden;background:var(--accent);color:#FAF9F5;border-radius:16px;padding:24px 24px 32px}
+header.brandbar::after{content:"";position:absolute;right:-72px;top:-72px;width:224px;height:224px;border-radius:50%;background:#E8EFEB;opacity:.12;pointer-events:none}
+header.brandbar .logo{display:block;width:200px;height:auto;margin:0 0 24px -6px}
+header h1{font-size:1.75rem;line-height:1.15;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+header p{color:#E8EFEB;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;margin-top:24px}
+.card h2{font-size:1.2rem;line-height:1.2;font-weight:600;color:var(--accent);margin:0 0 8px}
+.card .intro{color:var(--muted);margin:0 0 16px;font-size:.95rem}
+.privacy{background:var(--accent-soft);border-color:var(--accent-soft);border-left:4px solid var(--accent);font-size:.95rem}
+.privacy strong{color:var(--accent)}
+label.f{display:block;font-weight:600;margin:16px 0 4px;font-size:.95rem}
+input[type=text],input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;color:var(--ink);background:#fff}
+input[type=text]:focus,input[type=date]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 2fr;gap:0 16px}
-.q{padding:14px 0;border-top:1px solid var(--line)}
+.q{padding:16px 0;border-top:1px solid var(--line)}
 .q:first-of-type{border-top:0}
 .q .t{margin:0 0 8px}
-.q .t b{display:inline-block;min-width:1.8em;color:var(--muted);font-weight:600}
+.q .t b{display:inline-block;min-width:1.8em;color:var(--accent);font-weight:600}
 .q .ex{display:block;color:var(--muted);font-size:.9rem}
 .opts{display:flex;gap:8px;flex-wrap:wrap}
 .opts label{flex:1 1 0;min-width:110px;position:relative}
 .opts input{position:absolute;opacity:0;inset:0}
-.opts span{display:block;text-align:center;padding:9px 6px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:.9rem;background:#fff;user-select:none}
-.opts input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff}
+.opts span{display:block;text-align:center;padding:10px 6px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:.9rem;background:#fff;user-select:none;transition:background-color .15s,border-color .15s}
+.opts span:hover{border-color:var(--accent);background:var(--accent-soft)}
+.opts input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
 .opts input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.q.missing{border-left:4px solid var(--err);padding-left:12px;margin-left:-16px}
 .q.missing .t{color:var(--err)}
-.legend{font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.legend{font-size:.85rem;color:var(--muted);margin-bottom:8px;padding:8px 12px;background:var(--accent-soft);border-radius:8px}
 .hidden{display:none}
-button{font:inherit;font-weight:600;padding:12px 20px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer;width:100%}
-button:hover{filter:brightness(1.08)}
+button{font:inherit;font-weight:600;padding:14px 24px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer;width:100%;transition:background-color .15s}
+button:hover{background:var(--accent-dark)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .msg{margin-top:12px;font-size:.95rem}
 .msg.err{color:var(--err)}
-.done{border-color:#bfe0cc;background:#eef8f1}
+.done{border-color:var(--accent-soft);background:var(--accent-soft);border-left:4px solid var(--accent)}
 .done h2{color:var(--ok)}
-.progress{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
-.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.done h2::after{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--coral);margin-left:8px;vertical-align:middle}
+.progress{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5}
+.bar{position:relative;height:8px;background:var(--line);border-radius:4px}
+.bar i{position:relative;display:block;height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .2s}
+.bar i::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 2px var(--bg)}
 .progress small{color:var(--muted)}
-@media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.opts label{min-width:calc(50% - 4px)}}
+@media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.opts label{min-width:calc(50% - 4px)}header.brandbar{padding:20px 20px 24px}header.brandbar .logo{width:170px;margin-bottom:16px}header h1{font-size:1.5rem}.card{padding:20px}.q.missing{margin-left:-12px;padding-left:8px}}
+@media print{.progress{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
+<header class="brandbar">
+  <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-label="ADHDPunt logo"><g transform="translate(0 7) scale(.82)"><g fill="none" stroke="#FAF9F5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M45 58 L62 28 L98 28 L116 58 L98 88 L62 88 Z"/><path d="M45 58 H24 M62 28 L52 10 M116 58 L142 76 L170 58 L190 70"/><path d="M72 45 L66 58 M90 74 H78 M96 44 L104 58"/></g><circle cx="202" cy="76" r="13" fill="#F39B83"/></g><text x="185" y="76" fill="#FAF9F5" font-family="Inter, Aptos, Arial, sans-serif" font-size="48"><tspan font-weight="700">ADHD</tspan><tspan font-weight="400">Punt</tspan></text></svg>
   <h1>Vragenlijst aandacht en hyperactiviteit</h1>
   <p>ADHDPunt · invullen duurt ongeveer 10–15 minuten</p>
 </header>
@@ -588,22 +602,32 @@ function buildPdf(){
  var vl=fmtInit(document.getElementById("voorl").value),tv=document.getElementById("tussen").value.trim(),an=document.getElementById("achter").value.trim();
  var naam=[vl,tv,an].filter(Boolean).join(" "),geb=fmtDate(document.getElementById("gebdat").value);
  var K=score("k"),V=score("v");
- var M=14,y=16,W=210-2*M,ac=[31,95,139];
- doc.setFont("helvetica","bold");doc.setFontSize(15);doc.text("ADHD-screening – uitslag zelfrapportage",M,y);
- doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(90);
+ var M=18,y=10,W=210-2*M,ac=[33,79,66],sage=[232,239,235],ink=[38,59,53],mut=[82,102,95],grid=[214,224,218];
+ // ADHDPunt primary logo (vector, from the official SVG geometry)
+ (function(x0,y0,w){var s=w/520,k=.82,P=function(px,py){return [x0+px*k*s,y0+(7+py*k)*s]};
+  doc.setDrawColor(ac[0],ac[1],ac[2]);doc.setLineWidth(8*k*s);doc.setLineCap("round");doc.setLineJoin("round");
+  [[[45,58],[62,28],[98,28],[116,58],[98,88],[62,88],[45,58]],[[45,58],[24,58]],[[62,28],[52,10]],[[116,58],[142,76],[170,58],[190,70]],[[72,45],[66,58]],[[90,74],[78,74]],[[96,44],[104,58]]]
+   .forEach(function(pl){for(var i=1;i<pl.length;i++){var a=P(pl[i-1][0],pl[i-1][1]),b=P(pl[i][0],pl[i][1]);doc.line(a[0],a[1],b[0],b[1]);}});
+  var c=P(202,76);doc.setFillColor(243,155,131);doc.circle(c[0],c[1],13*k*s,"F");
+  var fs=48*s/0.3528;doc.setTextColor(ac[0],ac[1],ac[2]);doc.setFont("helvetica","bold");doc.setFontSize(fs);doc.text("ADHD",x0+185*s,y0+76*s);
+  var wA=doc.getTextWidth("ADHD");doc.setFont("helvetica","normal");doc.text("Punt",x0+185*s+wA,y0+76*s);
+  doc.setLineWidth(0.2);doc.setLineCap("butt");doc.setLineJoin("miter");doc.setTextColor(0);})(M,y,46);
+ y=31;
+ doc.setFont("helvetica","bold");doc.setFontSize(15);doc.setTextColor(ac[0],ac[1],ac[2]);doc.text("ADHD-screening – uitslag zelfrapportage",M,y);doc.setTextColor(ink[0],ink[1],ink[2]);
+ doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(mut[0],mut[1],mut[2]);
  doc.text("Ultrakorte Vragenlijst (Kooij, 2006) en Zelfrapportage Vragenlijst Aandachtsproblemen en Hyperactiviteit (Kooij & Buitelaar, 1997)",M,y+5);
- doc.setTextColor(0);y+=10;
- doc.autoTable({startY:y,theme:"plain",styles:{fontSize:10,cellPadding:1.2},columnStyles:{0:{fontStyle:"bold",cellWidth:38}},margin:{left:M,right:M},
+ doc.setTextColor(ink[0],ink[1],ink[2]);y+=10;
+ doc.autoTable({startY:y,theme:"plain",styles:{fontSize:10,cellPadding:1.2,textColor:ink},columnStyles:{0:{fontStyle:"bold",cellWidth:38,textColor:ac}},margin:{left:M,right:M},
   body:[["Naam",naam],["Geboortedatum",geb],["Datum invullen",today()]]});
  y=doc.lastAutoTable.finalY+5;
 
  // Samenvatting
- function sec(t){doc.setFont("helvetica","bold");doc.setFontSize(11.5);doc.setTextColor(ac[0],ac[1],ac[2]);doc.text(t,M,y);doc.setTextColor(0);doc.setFont("helvetica","normal");y+=2;}
+ function sec(t){doc.setFont("helvetica","bold");doc.setFontSize(11.5);doc.setTextColor(ac[0],ac[1],ac[2]);doc.text(t,M,y);doc.setTextColor(ink[0],ink[1],ink[2]);doc.setFont("helvetica","normal");y+=2;}
  sec("Samenvatting");
  var yn=function(b){return b?"Ja":"Nee"};
  var anyYes=q4needed(),s4=val("s4");
  var screenPos=anyYes&&s4===1;
- doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:9.5,cellPadding:1.8},headStyles:{fillColor:ac,textColor:255},
+ doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:9.5,cellPadding:1.8,textColor:ink,lineColor:grid,lineWidth:0.2},headStyles:{fillColor:sage,textColor:ac,fontStyle:"bold",lineColor:grid,lineWidth:0.2},
   head:[["","Kindertijd (0–12 jr)","Volwassenheid (6 mnd)"]],
   body:[
    ["Aandacht (A): aantal kenmerken",K.A+" / 9",V.A+" / 9"],
@@ -626,36 +650,36 @@ function buildPdf(){
   var kv=c[1].map(function(i){return val("k"+i)}).join(" / "),vv=c[1].map(function(i){return val("v"+i)}).join(" / ");
   return [c[0],CRITLBL[c[0]],items,kv+"   |   "+yn(K.rows[c[0]]),vv+"   |   "+yn(V.rows[c[0]])];
  });
- doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:8.5,cellPadding:1.3},headStyles:{fillColor:ac,textColor:255},
+ doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:8.5,cellPadding:1.3,textColor:ink,lineColor:grid,lineWidth:0.2},headStyles:{fillColor:sage,textColor:ac,fontStyle:"bold",lineColor:grid,lineWidth:0.2},
   head:[["Crit.","Kenmerk","Vraag","Kind: score | aanwezig","Volw.: score | aanwezig"]],body:body,
   columnStyles:{0:{cellWidth:12},2:{cellWidth:16,halign:"center"},3:{cellWidth:36,halign:"center"},4:{cellWidth:36,halign:"center"}},
   didParseCell:function(d){if(d.section==="body"&&d.row.index===9){}if(d.section==="body"&&(d.column.index===3||d.column.index===4)&&/Ja$/.test(d.cell.raw))d.cell.styles.fontStyle="bold";},
-  willDrawCell:function(d){if(d.section==="body"&&d.row.index>=9)d.cell.styles.fillColor=[244,246,249]}});
+  willDrawCell:function(d){if(d.section==="body"&&d.row.index>=9)d.cell.styles.fillColor=[246,248,247]}});
  y=doc.lastAutoTable.finalY+4;
- doc.setFontSize(8);doc.setTextColor(90);
+ doc.setFontSize(8);doc.setTextColor(mut[0],mut[1],mut[2]);
  var note="Het DSM-IV-afkappunt (6/9) is vastgesteld voor de kindertijd; voor adolescenten en volwassenen doet de DSM-IV geen uitspraak. Onderzoek wijst op een lager afkappunt in de volwassenheid, vanaf 4/9 (Kooij et al., Psychol Med 2005;35:817-827). Dit is een screeningsinstrument; de uitslag is geen diagnose. Bevestiging via klinisch interview (DIVA-5).";
- lines=doc.splitTextToSize(note,W);doc.text(lines,M,y);doc.setTextColor(0);
+ lines=doc.splitTextToSize(note,W);if(y+lines.length*3.4>280){doc.addPage();y=20;}doc.text(lines,M,y);doc.setTextColor(ink[0],ink[1],ink[2]);
 
  // Antwoorden
  doc.addPage();y=16;
  sec("Antwoorden – Ultrakorte Vragenlijst");
  var ynv=function(v){return v===null?"(niet gevraagd)":(v===1?"Ja":"Nee")};
- doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:9,cellPadding:1.5},headStyles:{fillColor:ac,textColor:255},
+ doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:9,cellPadding:1.5,textColor:ink,lineColor:grid,lineWidth:0.2},headStyles:{fillColor:sage,textColor:ac,fontStyle:"bold",lineColor:grid,lineWidth:0.2},
   head:[["#","Vraag","Antwoord"]],body:D1.map(function(q,i){return [i+1,q.t,ynv(val("s"+(i+1)))]}),
   columnStyles:{0:{cellWidth:8},2:{cellWidth:30,halign:"center"}}});
  y=doc.lastAutoTable.finalY+6;
  sec("Antwoorden – Zelfrapportage (0 = nooit/zelden, 1 = soms, 2 = vaak, 3 = erg vaak)");
  var rows=D2.map(function(t,i){return [i+1,t,val("v"+(i+1)),val("k"+(i+1))]});
- doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:8.5,cellPadding:1.3},headStyles:{fillColor:ac,textColor:255},
+ doc.autoTable({startY:y,theme:"grid",margin:{left:M,right:M},styles:{fontSize:8.5,cellPadding:1.3,textColor:ink,lineColor:grid,lineWidth:0.2},headStyles:{fillColor:sage,textColor:ac,fontStyle:"bold",lineColor:grid,lineWidth:0.2},
   head:[["#","Uitspraak (formulering volwassenheid)","Volw.","Kind"]],body:rows,
   columnStyles:{0:{cellWidth:8},2:{cellWidth:16,halign:"center"},3:{cellWidth:16,halign:"center"}},
   didParseCell:function(d){if(d.section==="body"&&d.column.index>=2&&d.cell.raw>=2)d.cell.styles.fontStyle="bold";}});
  y=doc.lastAutoTable.finalY+4;
- doc.setFontSize(8);doc.setTextColor(90);
+ doc.setFontSize(8);doc.setTextColor(mut[0],mut[1],mut[2]);
  doc.text(doc.splitTextToSize("Kolom Kind: dezelfde uitspraak in de verleden tijd over 0-12 jaar. Afwijkend: kind-item 12 'Ik kon me moeilijk ontspannen'; kind-item 13 'Ik had moeite rustig te spelen'.",W),M,y);
 
  var n=doc.getNumberOfPages();
- for(var p=1;p<=n;p++){doc.setPage(p);doc.setFontSize(7.5);doc.setTextColor(120);
+ for(var p=1;p<=n;p++){doc.setPage(p);doc.setDrawColor(grid[0],grid[1],grid[2]);doc.setLineWidth(0.2);doc.line(M,284.5,210-M,284.5);doc.setFontSize(7.5);doc.setTextColor(mut[0],mut[1],mut[2]);
   doc.text("ADHDPunt · vertrouwelijk – medisch dossier · "+naam+" · "+geb,M,289);doc.text("pagina "+p+" / "+n,210-M,289,{align:"right"});}
  var clean=function(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Za-z0-9]+/g,"_").replace(/^_|_$/g,"")};
  var safe=clean(vl.replace(/\./g,""))+"_"+clean([tv,an].filter(Boolean).join(" "));
