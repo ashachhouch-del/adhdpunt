@@ -13,7 +13,7 @@ export const Route = createFileRoute("/aanmelden")({
   component: Page,
 });
 
-const field = "mt-1 w-full rounded-lg border border-input px-4 py-3";
+const field = "mt-1 w-full rounded-lg border border-input bg-card px-4 py-3";
 
 function Page() {
   const navigate = useNavigate();
@@ -149,7 +149,7 @@ function Page() {
             </span>
           </label>
           {err.akkoord && <p className="text-sm text-destructive">{err.akkoord}</p>}
-          <button className="rounded-full bg-accent px-6 py-3 font-bold text-accent-foreground">
+          <button className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-secondary">
             Aanmelding versturen
           </button>
         </form>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Card, CtaBand, CtaButton, Section, meta } from "@/components/site";
+import { BrandArc, Card, CtaBand, CtaButton, Section, meta } from "@/components/site";
 
 export const WACHTTIJD_DAGEN = 14;
 
@@ -50,7 +50,7 @@ function WaitTimeCounter() {
         </p>
         <div className="mt-4 flex items-baseline justify-center gap-3">
           <span
-            className="text-7xl font-extrabold leading-none tabular-nums md:text-8xl"
+            className="text-7xl font-semibold leading-none tabular-nums md:text-8xl"
             aria-label={`${WACHTTIJD_DAGEN} dagen`}
           >
             {days}
@@ -69,10 +69,11 @@ function WaitTimeCounter() {
 function Index() {
   return (
     <>
-      <section className="bg-muted">
-        <div className="mx-auto max-w-4xl px-4 py-20 md:py-28">
+      <section className="relative overflow-hidden bg-muted">
+        <BrandArc />
+        <div className="relative mx-auto max-w-4xl px-4 py-20 md:py-28">
           <p className="font-bold text-secondary">ADHD-zorg voor volwassenen</p>
-          <h1 className="mt-3 text-4xl font-extrabold leading-tight text-primary md:text-6xl">
+          <h1 className="mt-3 text-4xl font-semibold leading-tight text-primary md:text-6xl">
             Duidelijkheid over ADHD, in jouw tempo.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
@@ -83,7 +84,7 @@ function Index() {
             <CtaButton />
             <Link
               to="/adhd-diagnostiek"
-              className="rounded-full border border-primary px-6 py-3 font-bold text-primary"
+              className="rounded-lg border border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
             >
               Hoe werkt diagnostiek?
             </Link>

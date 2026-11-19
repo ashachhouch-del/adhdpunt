@@ -28,7 +28,7 @@ function Page() {
               <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Persoonlijke bijdrage
               </p>
-              <p className="mt-1 text-3xl font-extrabold text-primary">€ 250</p>
+              <p className="mt-1 text-3xl font-semibold text-primary">€ 250</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Eenmalig voor het hele traject, ongeacht de duur.
               </p>
@@ -37,7 +37,7 @@ function Page() {
               <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Eigen risico
               </p>
-              <p className="mt-1 text-3xl font-extrabold text-primary">Wettelijk bedrag</p>
+              <p className="mt-1 text-3xl font-semibold text-primary">Wettelijk bedrag</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Alleen als je dit in dat kalenderjaar nog niet hebt verbruikt.
               </p>
@@ -48,7 +48,7 @@ function Page() {
               <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Diagnostiek
               </p>
-              <p className="mt-1 text-2xl font-extrabold text-primary">± € 2.000</p>
+              <p className="mt-1 text-2xl font-semibold text-primary">± € 2.000</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Intake, onderzoek en adviesgesprek samen.
               </p>
@@ -57,7 +57,7 @@ function Page() {
               <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Behandeling (gemiddeld 6 maanden)
               </p>
-              <p className="mt-1 text-2xl font-extrabold text-primary">± € 4.000</p>
+              <p className="mt-1 text-2xl font-semibold text-primary">± € 4.000</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Afhankelijk van het aantal consulten en de gekozen behandeling.
               </p>

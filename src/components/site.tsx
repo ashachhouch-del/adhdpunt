@@ -62,15 +62,17 @@ export function Header() {
 
 export function CtaButton({
   small,
+  inverse,
   label = "Direct aanmelden",
 }: {
   small?: boolean;
+  inverse?: boolean;
   label?: string;
 }) {
   return (
     <Link
       to="/aanmelden"
-      className={`inline-flex items-center justify-center rounded-full bg-accent font-bold text-accent-foreground shadow-sm transition hover:brightness-95 ${small ? "px-4 py-2 text-sm" : "px-6 py-3"}`}
+      className={`inline-flex items-center justify-center rounded-lg font-semibold shadow-sm transition focus-visible:outline-2 focus-visible:outline-offset-2 ${inverse ? "bg-background text-primary hover:bg-muted focus-visible:outline-background" : "bg-primary text-primary-foreground hover:bg-secondary focus-visible:outline-primary"} ${small ? "px-4 py-2 text-sm" : "px-6 py-3"}`}
     >
       {label}
     </Link>
@@ -82,7 +84,7 @@ export function MobileCta() {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background p-3 md:hidden">
       <Link
         to="/aanmelden"
-        className="block rounded-full bg-accent py-3 text-center font-bold text-accent-foreground"
+        className="block rounded-lg bg-primary py-3 text-center font-semibold text-primary-foreground"
       >
         Direct aanmelden
       </Link>
@@ -129,9 +131,10 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-muted">
-      <div className="mx-auto max-w-4xl px-4 py-16 md:py-20">
-        <h1 className="text-3xl font-extrabold leading-tight text-primary md:text-5xl">{title}</h1>
+    <section className="relative overflow-hidden bg-muted">
+      <BrandArc />
+      <div className="relative mx-auto max-w-4xl px-4 py-16 md:py-20">
+        <h1 className="text-3xl font-semibold leading-tight text-primary md:text-5xl">{title}</h1>
         <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{intro}</p>
         {children && <div className="mt-8">{children}</div>}
       </div>
@@ -139,10 +142,23 @@ export function PageHero({
   );
 }
 
+/** Decorative brand device: deep-green quarter circle with a single coral endpoint dot. */
+export function BrandArc() {
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 lg:block"
+    >
+      <span className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary" />
+      <span className="absolute top-44 right-40 h-5 w-5 rounded-full bg-accent" />
+    </span>
+  );
+}
+
 export function Section({ title, children }: { title?: string; children: ReactNode }) {
   return (
     <section className="mx-auto max-w-4xl px-4 pt-16">
-      {title && <h2 className="mb-6 text-2xl font-extrabold text-primary md:text-3xl">{title}</h2>}
+      {title && <h2 className="mb-6 text-2xl font-semibold text-primary md:text-3xl">{title}</h2>}
       {children}
     </section>
   );
@@ -160,13 +176,17 @@ export function Card({ title, children }: { title: string; children: ReactNode }
 export function CtaBand() {
   return (
     <Section>
-      <div className="rounded-2xl bg-primary p-8 text-primary-foreground md:p-12">
-        <h2 className="text-2xl font-extrabold">Klaar om de eerste stap te zetten?</h2>
+      <div className="relative overflow-hidden rounded-2xl bg-primary p-8 text-primary-foreground md:p-12">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-16 -bottom-16 h-56 w-56 rounded-full bg-muted/10"
+        />
+        <h2 className="text-2xl font-semibold">Klaar om de eerste stap te zetten?</h2>
         <p className="mt-2 opacity-90">
           Aanmelden duurt een paar minuten. Wij nemen daarna contact met je op.
         </p>
         <div className="mt-6">
-          <CtaButton />
+          <CtaButton inverse />
         </div>
       </div>
     </Section>
@@ -209,28 +229,27 @@ export function meta(title: string, description: string, path: string) {
 }
 
 export function Logo({ inverse }: { inverse?: boolean }) {
+  const ink = inverse ? "var(--primary-foreground)" : "var(--primary)";
   return (
-    <span
-      className={`inline-flex items-center gap-2 ${inverse ? "text-primary-foreground" : "text-primary"}`}
+    <svg
+      viewBox="0 0 430 120"
+      className="h-10 w-auto"
+      role="img"
+      aria-label="ADHDPunt"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <svg
-        viewBox="0 0 64 34"
-        className="h-9 w-auto"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden
-      >
-        <path d="M13.5 9 L22.5 9 L27 17 L22.5 25 L13.5 25 L9 17 Z" />
-        <path d="M15.5 13 L20.5 13 M15.5 21 L20.5 21" strokeWidth="2.5" />
-        <path d="M13.5 9 L10 2 M9 17 L2 17 M27 17 L35 23 L43 18 L50 22" />
-        <circle cx="55" cy="25" r="5" fill="var(--accent)" stroke="none" />
-      </svg>
-      <span className="text-xl font-extrabold tracking-tight">
-        ADHD<span className="font-semibold">Punt</span>
-      </span>
-    </span>
+      <g transform="translate(0 7) scale(.82)">
+        <g fill="none" stroke={ink} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M45 58 L62 28 L98 28 L116 58 L98 88 L62 88 Z" />
+          <path d="M45 58 H24 M62 28 L52 10 M116 58 L142 76 L170 58 L190 70" />
+          <path d="M72 45 L66 58 M90 74 H78 M96 44 L104 58" />
+        </g>
+        <circle cx="202" cy="76" r="13" fill="#F39B83" />
+      </g>
+      <text x="185" y="76" fill={ink} fontFamily="Inter, Aptos, Arial, sans-serif" fontSize="48">
+        <tspan fontWeight="700">ADHD</tspan>
+        <tspan fontWeight="400">Punt</tspan>
+      </text>
+    </svg>
   );
 }

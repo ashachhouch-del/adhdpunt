@@ -20,7 +20,10 @@ function Page() {
       title="Bedankt voor je aanmelding"
       intro="We hebben je gegevens ontvangen en nemen binnen enkele werkdagen contact met je op."
     >
-      <Link to="/" className="rounded-full border border-primary px-6 py-3 font-bold text-primary">
+      <Link
+        to="/"
+        className="rounded-lg border border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
+      >
         Terug naar home
       </Link>
     </PageHero>
