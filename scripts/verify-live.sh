@@ -53,6 +53,7 @@ if [[ -n "$BUILD" ]]; then
   for q in "$BUILD"/vragenlijst-*.html; do
     [[ -e "$q" ]] || continue
     check "questionnaire (unlisted)" 200 - "$SITE/$(basename "$q" .html)"
+    check "questionnaire font (self-hosted)" 200 - "$SITE/fonts/manrope-latin.woff"
   done
 fi
 cert=$(echo | openssl s_client -connect adhdpunt.nl:443 -servername adhdpunt.nl 2>/dev/null | openssl x509 -noout -issuer -enddate 2>/dev/null | tr '\n' ' ')

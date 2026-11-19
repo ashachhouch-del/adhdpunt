@@ -6,67 +6,73 @@
 <meta name="robots" content="noindex,nofollow">
 <title>ADHD Vragenlijst</title>
 <style>
-/* ADHDPunt huisstijl: Deep Green #214F42, Forest Depth #173D34, Punt Coral #F39B83 (accent only),
-   Soft Sage #E8EFEB, Warm White #FAF9F5, Charcoal Green #263B35. 8-pt spacing, radius 8–16 px. */
-:root{--bg:#FAF9F5;--card:#fff;--ink:#263B35;--muted:#52665F;--line:#D6E0DA;--accent:#214F42;--accent-dark:#173D34;--accent-soft:#E8EFEB;--coral:#F39B83;--err:#B3261E;--ok:#214F42}
+/* ADHDPunt huisstijl, as on adhdpunt.nl (see the adhdpunt-brand skill):
+   Deep Green #1E4C3A, Mid Green #3F8066, Coral #EB9070 (main button + small accents),
+   Soft Sage #ECF2EE, White #FFFFFF, Ink Green #112D21, Muted Green #465B51, Border #DCE3DE.
+   Font: Manrope (self-hosted, Open Font License; no request to Google). */
+@font-face{font-family:"Manrope";src:url("/fonts/manrope-latin.woff") format("woff");font-weight:200 800;font-style:normal;font-display:swap}
+:root{--bg:#FFFFFF;--card:#FFFFFF;--ink:#112D21;--muted:#465B51;--line:#DCE3DE;--input:#CDD7D0;--accent:#1E4C3A;--accent-soft:#ECF2EE;--secondary:#3F8066;--coral:#EB9070;--err:#B3261E;--ok:#1E4C3A}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,Aptos,"Segoe UI",Arial,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:24px 16px 80px}
-header.brandbar{position:relative;overflow:hidden;background:var(--accent);color:#FAF9F5;border-radius:16px;padding:24px 24px 32px}
-header.brandbar::after{content:"";position:absolute;right:-72px;top:-72px;width:224px;height:224px;border-radius:50%;background:#E8EFEB;opacity:.12;pointer-events:none}
-header.brandbar .logo{display:block;width:200px;height:auto;margin:0 0 24px -6px}
-header h1{font-size:1.75rem;line-height:1.15;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
-header p{color:#E8EFEB;margin:0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;margin-top:24px}
-.card h2{font-size:1.2rem;line-height:1.2;font-weight:600;color:var(--accent);margin:0 0 8px}
-.card .intro{color:var(--muted);margin:0 0 16px;font-size:.95rem}
-.privacy{background:var(--accent-soft);border-color:var(--accent-soft);border-left:4px solid var(--accent);font-size:.95rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Manrope,Arial,system-ui,sans-serif}
+header.site{background:#fff;border-bottom:1px solid var(--line)}
+header.site .in{max-width:760px;margin:0 auto;height:64px;padding:0 16px;display:flex;align-items:center}
+header.site .logo{display:block;height:36px;width:auto}
+.hero{background:var(--accent-soft)}
+.hero .in{max-width:760px;margin:0 auto;padding:48px 16px 56px}
+.hero h1{font-size:1.875rem;line-height:1.25;font-weight:800;color:var(--accent);margin:0 0 16px;letter-spacing:-.01em}
+.hero p{color:var(--muted);font-size:1.125rem;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding:8px 16px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:24px}
+.card h2{font-size:1.5rem;line-height:1.25;font-weight:800;color:var(--accent);margin:0 0 8px}
+.card .intro{color:var(--muted);margin:0 0 16px}
+.privacy{background:var(--accent-soft);border:0;border-radius:16px;padding:20px}
 .privacy strong{color:var(--accent)}
-label.f{display:block;font-weight:600;margin:16px 0 4px;font-size:.95rem}
-input[type=text],input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;color:var(--ink);background:#fff}
+label.f{display:block;font-weight:700;margin:16px 0 4px;font-size:.95rem}
+input[type=text],input[type=date]{width:100%;padding:12px 16px;border:1px solid var(--input);border-radius:12px;font:inherit;color:var(--ink);background:#fff}
 input[type=text]:focus,input[type=date]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 2fr;gap:0 16px}
 .q{padding:16px 0;border-top:1px solid var(--line)}
 .q:first-of-type{border-top:0}
-.q .t{margin:0 0 8px}
-.q .t b{display:inline-block;min-width:1.8em;color:var(--accent);font-weight:600}
-.q .ex{display:block;color:var(--muted);font-size:.9rem}
+.q .t{margin:0 0 8px;font-weight:500}
+.q .t b{display:inline-block;min-width:1.8em;color:var(--accent);font-weight:800}
+.q .ex{display:block;color:var(--muted);font-size:.9rem;font-weight:400}
 .opts{display:flex;gap:8px;flex-wrap:wrap}
 .opts label{flex:1 1 0;min-width:110px;position:relative}
 .opts input{position:absolute;opacity:0;inset:0}
-.opts span{display:block;text-align:center;padding:10px 6px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:.9rem;background:#fff;user-select:none;transition:background-color .15s,border-color .15s}
+.opts span{display:block;text-align:center;padding:10px 6px;border:1px solid var(--input);border-radius:12px;cursor:pointer;font-size:.9rem;font-weight:500;background:#fff;user-select:none;transition:background-color .15s,border-color .15s}
 .opts span:hover{border-color:var(--accent);background:var(--accent-soft)}
-.opts input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.opts input:checked+span{background:var(--accent);border-color:var(--accent);color:#FCFCFC;font-weight:700}
 .opts input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .q.missing{border-left:4px solid var(--err);padding-left:12px;margin-left:-16px}
 .q.missing .t{color:var(--err)}
-.legend{font-size:.85rem;color:var(--muted);margin-bottom:8px;padding:8px 12px;background:var(--accent-soft);border-radius:8px}
+.legend{font-size:.85rem;color:var(--muted);margin-bottom:8px;padding:8px 12px;background:var(--accent-soft);border-radius:12px}
 .hidden{display:none}
-button{font:inherit;font-weight:600;padding:14px 24px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer;width:100%;transition:background-color .15s}
-button:hover{background:var(--accent-dark)}
-button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+button{font:inherit;font-weight:700;padding:12px 24px;border-radius:9999px;border:0;background:var(--coral);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05);cursor:pointer;width:100%;transition:filter .15s}
+button:hover{filter:brightness(.95)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#again{background:transparent;color:var(--accent);border:1px solid var(--accent);box-shadow:none}
+#again:hover{filter:none;background:var(--accent);color:#FCFCFC}
 .msg{margin-top:12px;font-size:.95rem}
 .msg.err{color:var(--err)}
-.done{border-color:var(--accent-soft);background:var(--accent-soft);border-left:4px solid var(--accent)}
+.done{background:var(--accent-soft);border:0;border-radius:16px}
 .done h2{color:var(--ok)}
-.done h2::after{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--coral);margin-left:8px;vertical-align:middle}
-.progress{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5}
-.bar{position:relative;height:8px;background:var(--line);border-radius:4px}
-.bar i{position:relative;display:block;height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .2s}
-.bar i::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 2px var(--bg)}
+.progress{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5;border-bottom:1px solid transparent}
+.bar{height:8px;background:var(--accent-soft);border-radius:9999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:9999px;transition:width .2s}
 .progress small{color:var(--muted)}
-@media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.opts label{min-width:calc(50% - 4px)}header.brandbar{padding:20px 20px 24px}header.brandbar .logo{width:170px;margin-bottom:16px}header h1{font-size:1.5rem}.card{padding:20px}.q.missing{margin-left:-12px;padding-left:8px}}
+@media (min-width:768px){.hero .in{padding:64px 16px 72px}.hero h1{font-size:3rem}}
+@media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.opts label{min-width:calc(50% - 4px)}.card{padding:20px}.q.missing{margin-left:-12px;padding-left:8px}}
 @media print{.progress{display:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="brandbar">
-  <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-label="ADHDPunt logo"><g transform="translate(0 7) scale(.82)"><g fill="none" stroke="#FAF9F5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M45 58 L62 28 L98 28 L116 58 L98 88 L62 88 Z"/><path d="M45 58 H24 M62 28 L52 10 M116 58 L142 76 L170 58 L190 70"/><path d="M72 45 L66 58 M90 74 H78 M96 44 L104 58"/></g><circle cx="202" cy="76" r="13" fill="#F39B83"/></g><text x="185" y="76" fill="#FAF9F5" font-family="Inter, Aptos, Arial, sans-serif" font-size="48"><tspan font-weight="700">ADHD</tspan><tspan font-weight="400">Punt</tspan></text></svg>
+<header class="site"><div class="in"><svg xmlns="http://www.w3.org/2000/svg" class="logo" width="175" height="36" viewBox="0 0 175 36" role="img" aria-label="ADHDPunt logo"><g transform="scale(1.0588)" fill="none" stroke="#1E4C3A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9 L22.5 9 L27 17 L22.5 25 L13.5 25 L9 17 Z"/><path d="M15.5 13 L20.5 13 M15.5 21 L20.5 21" stroke-width="2.5"/><path d="M13.5 9 L10 2 M9 17 L2 17 M27 17 L35 23 L43 18 L50 22"/><circle cx="55" cy="25" r="5" fill="#EB9070" stroke="none"/></g><path fill="#1E4C3A" d="M76.15 25 80.55 10.6H84.61L89.01 25H86.21L82.29 12.3H82.81L78.95 25ZM78.79 22V19.46H86.39V22Z M90.31 25V10.6H94.97Q95.14 10.6 95.67 10.61Q96.2 10.62 96.69 10.68Q98.43 10.89 99.64 11.89Q100.85 12.89 101.48 14.43Q102.11 15.97 102.11 17.8Q102.11 19.63 101.48 21.17Q100.85 22.71 99.64 23.71Q98.43 24.71 96.69 24.92Q96.2 24.98 95.67 24.99Q95.14 25 94.97 25ZM93.07 22.44H94.97Q95.24 22.44 95.7 22.43Q96.16 22.41 96.53 22.34Q97.47 22.15 98.06 21.46Q98.66 20.77 98.94 19.8Q99.23 18.83 99.23 17.8Q99.23 16.72 98.94 15.75Q98.64 14.78 98.04 14.11Q97.44 13.44 96.53 13.26Q96.16 13.18 95.7 13.17Q95.24 13.16 94.97 13.16H93.07Z M104.01 25V10.6H106.73V16.52H113.17V10.6H115.89V25H113.17V19.06H106.73V25Z M118.19 25V10.6H122.85Q123.02 10.6 123.55 10.61Q124.08 10.62 124.57 10.68Q126.31 10.89 127.52 11.89Q128.73 12.89 129.36 14.43Q129.99 15.97 129.99 17.8Q129.99 19.63 129.36 21.17Q128.73 22.71 127.52 23.71Q126.31 24.71 124.57 24.92Q124.08 24.98 123.55 24.99Q123.02 25 122.85 25ZM120.95 22.44H122.85Q123.12 22.44 123.58 22.43Q124.04 22.41 124.41 22.34Q125.35 22.15 125.94 21.46Q126.54 20.77 126.82 19.8Q127.11 18.83 127.11 17.8Q127.11 16.72 126.81 15.75Q126.52 14.78 125.92 14.11Q125.32 13.44 124.41 13.26Q124.04 13.18 123.58 13.17Q123.12 13.16 122.85 13.16H120.95Z"/><path fill="#1E4C3A" d="M131.89 25V10.6H137.71Q137.92 10.6 138.23 10.61Q138.54 10.63 138.82 10.68Q140.02 10.87 140.83 11.5Q141.63 12.13 142.03 13.09Q142.43 14.05 142.43 15.21Q142.43 16.38 142.03 17.34Q141.63 18.3 140.82 18.93Q140.02 19.56 138.82 19.75Q138.54 19.79 138.23 19.81Q137.91 19.83 137.71 19.83H133.98V25ZM133.98 17.85H137.63Q137.83 17.85 138.07 17.83Q138.32 17.81 138.54 17.76Q139.18 17.61 139.57 17.2Q139.96 16.8 140.13 16.27Q140.3 15.74 140.3 15.21Q140.3 14.68 140.13 14.16Q139.96 13.63 139.57 13.22Q139.18 12.82 138.54 12.67Q138.32 12.61 138.07 12.59Q137.83 12.57 137.63 12.57H133.98Z M148 25.29Q146.88 25.29 146.12 24.93Q145.36 24.57 144.88 23.98Q144.41 23.4 144.16 22.71Q143.91 22.02 143.82 21.36Q143.73 20.7 143.73 20.2V14.2H145.85V19.51Q145.85 20.14 145.96 20.8Q146.06 21.47 146.35 22.04Q146.65 22.61 147.18 22.96Q147.72 23.31 148.58 23.31Q149.14 23.31 149.64 23.12Q150.14 22.94 150.51 22.53Q150.89 22.12 151.11 21.45Q151.32 20.78 151.32 19.82L152.62 20.31Q152.62 21.78 152.07 22.9Q151.52 24.03 150.49 24.66Q149.46 25.29 148 25.29ZM151.57 25V21.88H151.32V14.2H153.43V25Z M163.31 25V19.69Q163.31 19.06 163.2 18.4Q163.1 17.73 162.81 17.16Q162.51 16.59 161.98 16.24Q161.44 15.89 160.58 15.89Q160.02 15.89 159.52 16.08Q159.02 16.26 158.65 16.67Q158.27 17.08 158.05 17.75Q157.84 18.42 157.84 19.38L156.54 18.89Q156.54 17.42 157.09 16.3Q157.64 15.17 158.67 14.54Q159.7 13.91 161.16 13.91Q162.28 13.91 163.04 14.27Q163.8 14.63 164.28 15.22Q164.75 15.8 165 16.49Q165.25 17.18 165.34 17.84Q165.43 18.5 165.43 19V25ZM155.72 25V14.2H157.59V17.32H157.84V25Z M173.71 25Q172.69 25.2 171.71 25.17Q170.73 25.14 169.96 24.79Q169.19 24.44 168.8 23.69Q168.45 23.02 168.43 22.32Q168.4 21.63 168.4 20.75V11.2H170.5V20.65Q170.5 21.3 170.51 21.78Q170.53 22.26 170.72 22.59Q171.08 23.21 171.86 23.29Q172.65 23.38 173.71 23.23ZM166.33 15.88V14.2H173.71V15.88Z"/></svg></div></header>
+<section class="hero"><div class="in">
   <h1>Vragenlijst aandacht en hyperactiviteit</h1>
   <p>ADHDPunt · invullen duurt ongeveer 10–15 minuten</p>
-</header>
+</div></section>
+<div class="wrap">
 
 <div class="progress"><div class="bar"><i id="bar"></i></div><small id="ptxt">0 van 50 vragen beantwoord</small></div>
 
@@ -602,15 +608,27 @@ function buildPdf(){
  var vl=fmtInit(document.getElementById("voorl").value),tv=document.getElementById("tussen").value.trim(),an=document.getElementById("achter").value.trim();
  var naam=[vl,tv,an].filter(Boolean).join(" "),geb=fmtDate(document.getElementById("gebdat").value);
  var K=score("k"),V=score("v");
- var M=18,y=10,W=210-2*M,ac=[33,79,66],sage=[232,239,235],ink=[38,59,53],mut=[82,102,95],grid=[214,224,218];
- // ADHDPunt primary logo (vector, from the official SVG geometry)
- (function(x0,y0,w){var s=w/520,k=.82,P=function(px,py){return [x0+px*k*s,y0+(7+py*k)*s]};
-  doc.setDrawColor(ac[0],ac[1],ac[2]);doc.setLineWidth(8*k*s);doc.setLineCap("round");doc.setLineJoin("round");
-  [[[45,58],[62,28],[98,28],[116,58],[98,88],[62,88],[45,58]],[[45,58],[24,58]],[[62,28],[52,10]],[[116,58],[142,76],[170,58],[190,70]],[[72,45],[66,58]],[[90,74],[78,74]],[[96,44],[104,58]]]
-   .forEach(function(pl){for(var i=1;i<pl.length;i++){var a=P(pl[i-1][0],pl[i-1][1]),b=P(pl[i][0],pl[i][1]);doc.line(a[0],a[1],b[0],b[1]);}});
-  var c=P(202,76);doc.setFillColor(243,155,131);doc.circle(c[0],c[1],13*k*s,"F");
-  var fs=48*s/0.3528;doc.setTextColor(ac[0],ac[1],ac[2]);doc.setFont("helvetica","bold");doc.setFontSize(fs);doc.text("ADHD",x0+185*s,y0+76*s);
-  var wA=doc.getTextWidth("ADHD");doc.setFont("helvetica","normal");doc.text("Punt",x0+185*s+wA,y0+76*s);
+ var M=18,y=10,W=210-2*M,ac=[30,76,58],sage=[236,242,238],ink=[17,45,33],mut=[70,91,81],grid=[220,227,222];
+ // ADHDPunt logo as on adhdpunt.nl (adhdpunt-primary.svg, 175x36 units), drawn as vector shapes
+ (function(x0,y0,w){var s=w/175,k=36/34,X=function(u){return x0+u*s},Y=function(v){return y0+v*s};
+  doc.setDrawColor(ac[0],ac[1],ac[2]);doc.setLineCap("round");doc.setLineJoin("round");
+  var seg=function(pl,lw){doc.setLineWidth(lw*k*s);for(var i=1;i<pl.length;i++)doc.line(X(pl[i-1][0]*k),Y(pl[i-1][1]*k),X(pl[i][0]*k),Y(pl[i][1]*k));};
+  seg([[13.5,9],[22.5,9],[27,17],[22.5,25],[13.5,25],[9,17],[13.5,9]],3.5);
+  seg([[15.5,13],[20.5,13]],2.5);seg([[15.5,21],[20.5,21]],2.5);
+  seg([[13.5,9],[10,2]],3.5);seg([[9,17],[2,17]],3.5);seg([[27,17],[35,23],[43,18],[50,22]],3.5);
+  doc.setFillColor(235,144,112);doc.circle(X(55*k),Y(25*k),5*k*s,"F");
+  var P=["M76.15 25 80.55 10.6H84.61L89.01 25H86.21L82.29 12.3H82.81L78.95 25ZM78.79 22V19.46H86.39V22Z M90.31 25V10.6H94.97Q95.14 10.6 95.67 10.61Q96.2 10.62 96.69 10.68Q98.43 10.89 99.64 11.89Q100.85 12.89 101.48 14.43Q102.11 15.97 102.11 17.8Q102.11 19.63 101.48 21.17Q100.85 22.71 99.64 23.71Q98.43 24.71 96.69 24.92Q96.2 24.98 95.67 24.99Q95.14 25 94.97 25ZM93.07 22.44H94.97Q95.24 22.44 95.7 22.43Q96.16 22.41 96.53 22.34Q97.47 22.15 98.06 21.46Q98.66 20.77 98.94 19.8Q99.23 18.83 99.23 17.8Q99.23 16.72 98.94 15.75Q98.64 14.78 98.04 14.11Q97.44 13.44 96.53 13.26Q96.16 13.18 95.7 13.17Q95.24 13.16 94.97 13.16H93.07Z M104.01 25V10.6H106.73V16.52H113.17V10.6H115.89V25H113.17V19.06H106.73V25Z M118.19 25V10.6H122.85Q123.02 10.6 123.55 10.61Q124.08 10.62 124.57 10.68Q126.31 10.89 127.52 11.89Q128.73 12.89 129.36 14.43Q129.99 15.97 129.99 17.8Q129.99 19.63 129.36 21.17Q128.73 22.71 127.52 23.71Q126.31 24.71 124.57 24.92Q124.08 24.98 123.55 24.99Q123.02 25 122.85 25ZM120.95 22.44H122.85Q123.12 22.44 123.58 22.43Q124.04 22.41 124.41 22.34Q125.35 22.15 125.94 21.46Q126.54 20.77 126.82 19.8Q127.11 18.83 127.11 17.8Q127.11 16.72 126.81 15.75Q126.52 14.78 125.92 14.11Q125.32 13.44 124.41 13.26Q124.04 13.18 123.58 13.17Q123.12 13.16 122.85 13.16H120.95Z","M131.89 25V10.6H137.71Q137.92 10.6 138.23 10.61Q138.54 10.63 138.82 10.68Q140.02 10.87 140.83 11.5Q141.63 12.13 142.03 13.09Q142.43 14.05 142.43 15.21Q142.43 16.38 142.03 17.34Q141.63 18.3 140.82 18.93Q140.02 19.56 138.82 19.75Q138.54 19.79 138.23 19.81Q137.91 19.83 137.71 19.83H133.98V25ZM133.98 17.85H137.63Q137.83 17.85 138.07 17.83Q138.32 17.81 138.54 17.76Q139.18 17.61 139.57 17.2Q139.96 16.8 140.13 16.27Q140.3 15.74 140.3 15.21Q140.3 14.68 140.13 14.16Q139.96 13.63 139.57 13.22Q139.18 12.82 138.54 12.67Q138.32 12.61 138.07 12.59Q137.83 12.57 137.63 12.57H133.98Z M148 25.29Q146.88 25.29 146.12 24.93Q145.36 24.57 144.88 23.98Q144.41 23.4 144.16 22.71Q143.91 22.02 143.82 21.36Q143.73 20.7 143.73 20.2V14.2H145.85V19.51Q145.85 20.14 145.96 20.8Q146.06 21.47 146.35 22.04Q146.65 22.61 147.18 22.96Q147.72 23.31 148.58 23.31Q149.14 23.31 149.64 23.12Q150.14 22.94 150.51 22.53Q150.89 22.12 151.11 21.45Q151.32 20.78 151.32 19.82L152.62 20.31Q152.62 21.78 152.07 22.9Q151.52 24.03 150.49 24.66Q149.46 25.29 148 25.29ZM151.57 25V21.88H151.32V14.2H153.43V25Z M163.31 25V19.69Q163.31 19.06 163.2 18.4Q163.1 17.73 162.81 17.16Q162.51 16.59 161.98 16.24Q161.44 15.89 160.58 15.89Q160.02 15.89 159.52 16.08Q159.02 16.26 158.65 16.67Q158.27 17.08 158.05 17.75Q157.84 18.42 157.84 19.38L156.54 18.89Q156.54 17.42 157.09 16.3Q157.64 15.17 158.67 14.54Q159.7 13.91 161.16 13.91Q162.28 13.91 163.04 14.27Q163.8 14.63 164.28 15.22Q164.75 15.8 165 16.49Q165.25 17.18 165.34 17.84Q165.43 18.5 165.43 19V25ZM155.72 25V14.2H157.59V17.32H157.84V25Z M173.71 25Q172.69 25.2 171.71 25.17Q170.73 25.14 169.96 24.79Q169.19 24.44 168.8 23.69Q168.45 23.02 168.43 22.32Q168.4 21.63 168.4 20.75V11.2H170.5V20.65Q170.5 21.3 170.51 21.78Q170.53 22.26 170.72 22.59Q171.08 23.21 171.86 23.29Q172.65 23.38 173.71 23.23ZM166.33 15.88V14.2H173.71V15.88Z"];
+  doc.setFillColor(ac[0],ac[1],ac[2]);
+  P.forEach(function(d){var tk=d.match(/[MLHVQZ]|-?\d*\.?\d+/g),i=0,c="",cx=0,cy=0,sx=0,sy=0,n=function(){return parseFloat(tk[i++])};
+   while(i<tk.length){if(/[MLHVQZ]/.test(tk[i]))c=tk[i++];
+    if(c==="M"){cx=n();cy=n();sx=cx;sy=cy;doc.moveTo(X(cx),Y(cy));c="L";}
+    else if(c==="L"){cx=n();cy=n();doc.lineTo(X(cx),Y(cy));}
+    else if(c==="H"){cx=n();doc.lineTo(X(cx),Y(cy));}
+    else if(c==="V"){cy=n();doc.lineTo(X(cx),Y(cy));}
+    else if(c==="Q"){var qx=n(),qy=n(),ex=n(),ey=n();doc.curveTo(X(cx+2/3*(qx-cx)),Y(cy+2/3*(qy-cy)),X(ex+2/3*(qx-ex)),Y(ey+2/3*(qy-ey)),X(ex),Y(ey));cx=ex;cy=ey;}
+    else if(c==="Z"){doc.close();cx=sx;cy=sy;c="";}
+    else{i++;}}
+   doc.fill();});
   doc.setLineWidth(0.2);doc.setLineCap("butt");doc.setLineJoin("miter");doc.setTextColor(0);})(M,y,46);
  y=31;
  doc.setFont("helvetica","bold");doc.setFontSize(15);doc.setTextColor(ac[0],ac[1],ac[2]);doc.text("ADHD-screening – uitslag zelfrapportage",M,y);doc.setTextColor(ink[0],ink[1],ink[2]);
@@ -654,7 +672,7 @@ function buildPdf(){
   head:[["Crit.","Kenmerk","Vraag","Kind: score | aanwezig","Volw.: score | aanwezig"]],body:body,
   columnStyles:{0:{cellWidth:12},2:{cellWidth:16,halign:"center"},3:{cellWidth:36,halign:"center"},4:{cellWidth:36,halign:"center"}},
   didParseCell:function(d){if(d.section==="body"&&d.row.index===9){}if(d.section==="body"&&(d.column.index===3||d.column.index===4)&&/Ja$/.test(d.cell.raw))d.cell.styles.fontStyle="bold";},
-  willDrawCell:function(d){if(d.section==="body"&&d.row.index>=9)d.cell.styles.fillColor=[246,248,247]}});
+  willDrawCell:function(d){if(d.section==="body"&&d.row.index>=9)d.cell.styles.fillColor=[247,249,248]}});
  y=doc.lastAutoTable.finalY+4;
  doc.setFontSize(8);doc.setTextColor(mut[0],mut[1],mut[2]);
  var note="Het DSM-IV-afkappunt (6/9) is vastgesteld voor de kindertijd; voor adolescenten en volwassenen doet de DSM-IV geen uitspraak. Onderzoek wijst op een lager afkappunt in de volwassenheid, vanaf 4/9 (Kooij et al., Psychol Med 2005;35:817-827). Dit is een screeningsinstrument; de uitslag is geen diagnose. Bevestiging via klinisch interview (DIVA-5).";

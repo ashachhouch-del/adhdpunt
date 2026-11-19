@@ -7,6 +7,7 @@ DirectoryIndex index.html
 AddDefaultCharset utf-8
 AddType application/xml .xml
 AddType image/svg+xml .svg
+AddType font/woff .woff
 
 <IfModule mod_rewrite.c>
   RewriteEngine On

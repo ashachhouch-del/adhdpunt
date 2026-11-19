@@ -83,6 +83,7 @@ for q in "$ROOT"/vragenlijst-*.html; do
   [[ -e "$q" ]] || continue
   name=$(basename "$q" .html)
   check "questionnaire /$name" 200 - "/$name"
+  check "questionnaire font" 200 - "/fonts/manrope-latin.woff"
   if curl -sI -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE/$name" | grep -qi '^x-robots-tag: noindex'; then
     echo "PASS  questionnaire has X-Robots-Tag noindex"
   else
