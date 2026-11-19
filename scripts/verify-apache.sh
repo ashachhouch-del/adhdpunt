@@ -49,7 +49,10 @@ check() {
 
 # body_has <description> <path> <text>
 body_has() {
-  if curl -s -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE$2" | grep -aqF "$3"; then
+  # Download first, then search: grep -q on a pipe can stop curl early (SIGPIPE + pipefail).
+  local body
+  body=$(curl -s -H "Host: adhdpunt.nl" -H "X-Forwarded-Proto: https" "$BASE$2")
+  if grep -aqF "$3" <<<"$body"; then
     echo "PASS  $1"
   else
     echo "FAIL  $1  (\"$3\" not found)"
