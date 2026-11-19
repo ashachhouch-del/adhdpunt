@@ -2,7 +2,7 @@
 
 Website of ADHDPunt – specialist ADHD diagnostics and treatment for adults – served at **https://adhdpunt.nl**.
 
-Workflow: **Claude Code → GitHub → TransIP webhosting → adhdpunt.nl**. The project has no dependency on Lovable.
+Workflow: **Claude Code → GitHub (`main`) → TransIP webhosting → adhdpunt.nl**.
 
 ## Tech stack
 
@@ -56,7 +56,7 @@ None are needed. See `.env.example`. Never commit `.env` files or credentials.
 ## Deployment
 
 See **[TRANSIP_DEPLOYMENT.md](TRANSIP_DEPLOYMENT.md)** for upload, SSL, domain, testing and rollback.
-See **[MIGRATION.md](MIGRATION.md)** for what changed in the move away from Lovable.
+See **[MIGRATION.md](MIGRATION.md)** for the history of the move to TransIP (November 2026).
 
 ## Brand
 

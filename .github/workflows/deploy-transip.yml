@@ -2,7 +2,7 @@
 #
 # - Every push / pull request: install, lint, typecheck, test, build (no deploy).
 # - Deploy: on manual run ("Run workflow" in the Actions tab), or a push whose commit message contains
-#   [deploy], on main or the migration branch,
+#   [deploy], on main only,
 #   and only when these repository secrets exist (Settings → Secrets and variables → Actions):
 #     TRANSIP_SFTP_HOST      host shown in TransIP control panel → Site → SFTP/SSH
 #     TRANSIP_SFTP_PORT      22 (or 2222 if 22 does not work)
@@ -13,7 +13,7 @@ name: Build and deploy (TransIP)
 
 on:
   push:
-    branches: [main, "migration/**"]
+    branches: [main, "preview/**"]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -74,13 +74,16 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -q -m "Website build from $SOURCE"
-          git push -f "https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git" transip-deploy
+          # Preview branches publish to "transip-preview" so the real deploy build is never overwritten.
+          case "${{ github.ref_name }}" in preview/*) TARGET=transip-preview ;; *) TARGET=transip-deploy ;; esac
+          git branch -m "$TARGET"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git" "$TARGET"
 
   deploy:
     needs: build
     # Runs on a manual "Run workflow" with deploy ticked, or on a push whose commit message contains [deploy].
     if: >-
-      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/migration/remove-lovable-transip') &&
+      github.ref == 'refs/heads/main' &&
       ((github.event_name == 'workflow_dispatch' && inputs.deploy) ||
        (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy]')))
     runs-on: ubuntu-latest

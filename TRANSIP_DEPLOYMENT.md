@@ -94,7 +94,6 @@ The workflow builds, lints, typechecks and tests, then mirrors `transip-deploy/`
 
 - **Domain and hosting both at TransIP:** nothing to change. DNS already points to the hosting package.
 - **Domain registered elsewhere:** at that registrar, point the DNS records to the values shown in TransIP under *Shared Hosting → adhdpunt.nl → DNS settings* (A/AAAA records for `@` and `www`, or use TransIP's nameservers).
-- **Previously pointing to Lovable:** remove any custom-domain setting for adhdpunt.nl in the Lovable project, and remove DNS records that pointed to Lovable (the A record, or the CNAME on `www`). Then make sure only the TransIP records remain.
 
 DNS changes can take up to 24 hours to propagate. Check with `nslookup adhdpunt.nl` and `nslookup www.adhdpunt.nl`.
 
@@ -157,5 +156,4 @@ In the browser:
 
 - **Previous build:** keep each uploaded `transip-deploy/` as a zip (for example `adhdpunt-deploy-2026-11-17.zip`). To roll back, upload the previous zip's contents to `www/` again, the same way as in step 3.
 - **TransIP backups:** control panel → Shared Hosting → adhdpunt.nl → **Back-ups**: restore the `www` folder to an earlier date.
-- **Code:** the untouched Lovable version is on Git branch `backup/pre-migration-lovable` (commit `87ad6c3`). The migration is on `migration/remove-lovable-transip`. To undo a merged migration: `git revert <merge-commit>` on `main`, then rebuild and upload.
-- **Emergency:** if TransIP hosting fails completely, point DNS back to the previous host. Lovable's hosted version (`adhdpunt.lovable.app`) keeps working as long as that Lovable project exists.
+- **Code:** every change is a commit on `main`. To undo one, revert that commit on `main` and deploy again (commit message with `[deploy]`). The original pre-migration code is kept on branch `backup/pre-migration-lovable` for reference.

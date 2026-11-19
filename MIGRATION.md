@@ -2,6 +2,8 @@
 
 Date: 17 November 2026 · Branch: `migration/remove-lovable-transip`
 
+> **Completed 19 November 2026.** The Lovable project was disconnected from GitHub and the Lovable GitHub app was uninstalled by the owner. The migration branch was merged into `main` (fast-forward), and `main` is now the only live branch: pushes to `main` are tested, and a commit message containing `[deploy]` uploads to TransIP. The branch `migration/remove-lovable-transip` and the test branches were removed. This document is kept as history.
+
 | | |
 | --- | --- |
 | Pre-migration commit | `87ad6c3` "Pre-migration snapshot of Lovable export (adhdpunt-main.zip)" |

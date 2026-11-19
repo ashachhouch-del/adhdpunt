@@ -1,4 +1,4 @@
-// Standalone Vite configuration for ADHDPunt (no Lovable tooling).
+// Vite configuration for ADHDPunt.
 //
 // The site is built as fully static files for Apache webhosting (TransIP):
 //   - every public route is prerendered to its own HTML file (SEO tags included),
