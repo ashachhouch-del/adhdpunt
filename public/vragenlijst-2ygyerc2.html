@@ -51,8 +51,6 @@ input[type=text]:focus,input[type=date]:focus{outline:2px solid var(--accent);ou
 button{font:inherit;font-weight:700;padding:12px 24px;border-radius:9999px;border:0;background:var(--coral);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05);cursor:pointer;width:100%;transition:filter .15s}
 button:hover{filter:brightness(.95)}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-#again{background:transparent;color:var(--accent);border:1px solid var(--accent);box-shadow:none}
-#again:hover{filter:none;background:var(--accent);color:#FCFCFC}
 .msg{margin-top:12px;font-size:.95rem}
 .msg.err{color:var(--err)}
 .done{background:var(--accent-soft);border:0;border-radius:16px}
@@ -61,6 +59,15 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .bar{height:8px;background:var(--accent-soft);border-radius:9999px;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:9999px;transition:width .2s}
 .progress small{color:var(--muted)}
+/* Step navigation (4-step version) */
+.nav{display:flex;gap:12px;margin-top:24px}
+.nav button{flex:1}
+button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent);box-shadow:none}
+button.secondary:hover{filter:none;background:var(--accent);color:#FCFCFC}
+.steplbl{display:block;font-weight:700;color:var(--accent);font-size:.95rem;margin-bottom:8px}
+input[type=email]{width:100%;padding:12px 16px;border:1px solid var(--input);border-radius:12px;font:inherit;color:var(--ink);background:#fff}
+input[type=email]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.pmsg:empty{display:none}
 @media (min-width:768px){.hero .in{padding:64px 16px 72px}.hero h1{font-size:3rem}}
 @media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.opts label{min-width:calc(50% - 4px)}.card{padding:20px}.q.missing{margin-left:-12px;padding-left:8px}}
 @media print{.progress{display:none}}
@@ -74,13 +81,14 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </div></section>
 <div class="wrap">
 
-<div class="progress"><div class="bar"><i id="bar"></i></div><small id="ptxt">0 van 50 vragen beantwoord</small></div>
+<div class="progress"><span class="steplbl" id="steplbl">Stap 1 van 4 · Uw gegevens</span><div class="bar"><i id="bar"></i></div><small id="ptxt"></small></div>
 
+<form id="f" novalidate autocomplete="off">
+<section class="page" data-step="1">
 <div class="card privacy">
   <strong>Hoe werkt het?</strong> Na het invullen maakt u met één klik een PDF-bestand met uw antwoorden. Dat stuurt u naar ons terug door de e-mail van ADHDPunt te beantwoorden en het bestand als bijlage toe te voegen. Uw antwoorden worden vertrouwelijk behandeld. Maak de vragenlijst in één keer af: als u de pagina sluit, moet u opnieuw beginnen.
 </div>
 
-<form id="f" novalidate autocomplete="off">
 <div class="card">
   <h2>Uw gegevens</h2>
   <div class="grid3">
@@ -89,37 +97,49 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     <div><label class="f" for="achter">Achternaam</label><input type="text" id="achter" required></div>
   </div>
   <label class="f" for="gebdat">Geboortedatum</label><input type="date" id="gebdat" required style="max-width:260px">
+  <label class="f" for="email">E-mailadres</label><input type="email" id="email" placeholder="naam@voorbeeld.nl" autocomplete="email" required>
 </div>
+<div class="nav"><button type="button" class="next">Volgende</button></div>
+<div class="msg err pmsg"></div>
+</section>
 
+<section class="page hidden" data-step="2">
 <div class="card">
   <h2>Deel 1 – Korte vragen</h2>
   <p class="intro">Beantwoord met ja of nee.</p>
   <div id="d1"></div>
 </div>
+<div class="nav"><button type="button" class="secondary prev">Vorige</button><button type="button" class="next">Volgende</button></div>
+<div class="msg err pmsg"></div>
+</section>
 
+<section class="page hidden" data-step="3">
 <div class="card">
   <h2>Deel 2 – Nu (afgelopen zes maanden)</h2>
   <p class="intro">Kies bij elke uitspraak wat het beste uw gedrag van de <u>afgelopen zes maanden</u> beschrijft.</p>
   <div id="d2"></div>
 </div>
+<div class="nav"><button type="button" class="secondary prev">Vorige</button><button type="button" class="next">Volgende</button></div>
+<div class="msg err pmsg"></div>
+</section>
 
+<section class="page hidden" data-step="4">
 <div class="card">
   <h2>Deel 3 – Vroeger (als kind, 0–12 jaar)</h2>
   <p class="intro">Dezelfde kenmerken, maar nu over <u>uw gedrag als kind (0–12 jaar)</u>.</p>
   <div id="d3"></div>
 </div>
 
-<div class="card" id="submitcard">
-  <button type="submit">Klaar – maak PDF</button>
-  <div class="msg" id="msg"></div>
-</div>
+<div class="nav"><button type="button" class="secondary prev">Vorige</button><button type="submit">Klaar – maak PDF</button></div>
+<div class="msg err pmsg" id="msg"></div>
+</section>
 </form>
 
 <div class="card done hidden" id="done">
   <h2>Bedankt voor het invullen</h2>
   <p>Het PDF-bestand <strong id="fname"></strong> is gedownload. Kijk in uw map Downloads als u het niet ziet.</p>
   <p><strong>Volgende stap:</strong> beantwoord de e-mail die u van ADHDPunt kreeg en voeg dit PDF-bestand als bijlage toe. Stuur het niet via een nieuwe e-mail of via WhatsApp.</p>
-  <button type="button" id="again">PDF opnieuw downloaden</button>
+  <div class="nav" style="flex-direction:column"><button type="button" id="share" class="hidden">PDF naar uw eigen e-mail sturen</button><button type="button" id="again" class="secondary">PDF opnieuw downloaden</button></div>
 </div>
 </div>
 
@@ -565,7 +585,6 @@ function renderYN(){
 }
 function renderLik(id,items,pre){
  var c=document.getElementById(id);
- c.appendChild(el('<div class="legend">0 = nooit of zelden · 1 = soms · 2 = vaak · 3 = erg vaak</div>'));
  items.forEach(function(t,i){
   var n=pre+(i+1),o="";
   for(var v=0;v<4;v++)o+='<label><input type="radio" name="'+n+'" value="'+v+'"><span>'+SC[v]+'</span></label>';
@@ -581,11 +600,41 @@ function requiredNames(){
  var a=["s1","s2","s3"];if(q4needed())a.push("s4");
  for(var i=1;i<=23;i++)a.push("v"+i);for(i=1;i<=23;i++)a.push("k"+i);return a;
 }
+var STEPS=["Uw gegevens","Deel 1 – Korte vragen","Deel 2 – Nu","Deel 3 – Vroeger"],step=1;
+var pages=[].slice.call(document.querySelectorAll(".page"));
+function emailOk(s){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s)}
+function stepNames(n){
+ if(n===2){var a=["s1","s2","s3"];if(q4needed())a.push("s4");return a}
+ var p=n===3?"v":"k",r=[];if(n>=3)for(var i=1;i<=23;i++)r.push(p+i);return r;
+}
+function checkStep(n){
+ var pm=pages[n-1].querySelector(".pmsg");pm.textContent="";
+ if(n===1){
+  var miss=[];
+  ["voorl","achter","gebdat","email"].forEach(function(id){var x=document.getElementById(id),bad=!x.value.trim()||(id==="email"&&!emailOk(x.value.trim()));x.style.borderColor=bad?"#b3261e":"";if(bad)miss.push(x)});
+  if(miss.length){pm.textContent="Vul uw voorletters, achternaam, geboortedatum en een geldig e-mailadres in.";miss[0].focus();return false}
+  return true;
+ }
+ var mq=stepNames(n).filter(function(nm){return val(nm)===null});
+ mq.forEach(function(nm){document.getElementById("q_"+nm).classList.add("missing")});
+ if(mq.length){pm.textContent=mq.length===1?"Er is nog 1 vraag niet beantwoord (rood gemarkeerd).":"Er zijn nog "+mq.length+" vragen niet beantwoord (rood gemarkeerd).";document.getElementById("q_"+mq[0]).scrollIntoView({behavior:"smooth",block:"center"});return false}
+ return true;
+}
+function show(n){
+ step=n;pages.forEach(function(p,i){p.classList.toggle("hidden",i!==n-1)});
+ document.getElementById("steplbl").textContent="Stap "+n+" van 4 · "+STEPS[n-1];
+ update();window.scrollTo(0,0);
+}
+form.addEventListener("input",function(e){if(e.target.id){e.target.style.borderColor="";pages[step-1].querySelector(".pmsg").textContent=""}});
+form.addEventListener("click",function(e){
+ if(e.target.classList.contains("next")){if(checkStep(step))show(step+1)}
+ else if(e.target.classList.contains("prev")){show(step-1)}
+});
 function update(){
  document.getElementById("q_s4").classList.toggle("hidden",!q4needed());
  var req=requiredNames(),done=req.filter(function(n){return val(n)!==null}).length;
  document.getElementById("bar").style.width=(100*done/req.length)+"%";
- document.getElementById("ptxt").textContent=done+" van "+req.length+" vragen beantwoord";
+ document.getElementById("ptxt").textContent=Math.round(100*done/req.length)+"% ingevuld";
 }
 form.addEventListener("change",function(e){
  if(e.target.name){var q=document.getElementById("q_"+e.target.name);if(q)q.classList.remove("missing")}
@@ -636,7 +685,7 @@ function buildPdf(){
  doc.text("Ultrakorte Vragenlijst (Kooij, 2006) en Zelfrapportage Vragenlijst Aandachtsproblemen en Hyperactiviteit (Kooij & Buitelaar, 1997)",M,y+5);
  doc.setTextColor(ink[0],ink[1],ink[2]);y+=10;
  doc.autoTable({startY:y,theme:"plain",styles:{fontSize:10,cellPadding:1.2,textColor:ink},columnStyles:{0:{fontStyle:"bold",cellWidth:38,textColor:ac}},margin:{left:M,right:M},
-  body:[["Naam",naam],["Geboortedatum",geb],["Datum invullen",today()]]});
+  body:[["Naam",naam],["Geboortedatum",geb],["E-mailadres",document.getElementById("email").value.trim()],["Datum invullen",today()]]});
  y=doc.lastAutoTable.finalY+5;
 
  // Samenvatting
@@ -708,22 +757,20 @@ function buildPdf(){
 
 form.addEventListener("submit",function(e){
  e.preventDefault();
- var msg=document.getElementById("msg");msg.className="msg";msg.textContent="";
- var miss=[];
- ["voorl","achter","gebdat"].forEach(function(id){var x=document.getElementById(id);if(!x.value.trim()){miss.push(x);x.style.borderColor="#b3261e"}else x.style.borderColor=""});
- var mq=requiredNames().filter(function(n){return val(n)===null});
- mq.forEach(function(n){document.getElementById("q_"+n).classList.add("missing")});
- if(miss.length||mq.length){
-  msg.className="msg err";
-  msg.textContent=(miss.length?"Vul uw voorletters, achternaam en geboortedatum in. ":"")+(mq.length?mq.length+" vraag/vragen nog niet beantwoord (rood gemarkeerd).":"");
-  var first=miss[0]||document.getElementById("q_"+mq[0]);first.scrollIntoView({behavior:"smooth",block:"center"});return;
- }
- try{lastPdf=buildPdf();lastPdf.save(lastName);}catch(err){msg.className="msg err";msg.textContent="Er ging iets mis bij het maken van de PDF. Probeer een andere browser.";return;}
+ var msg=document.getElementById("msg");msg.textContent="";
+ for(var s=1;s<=4;s++){if(!checkStep(s)){if(s!==step){show(s);checkStep(s)}return}}
+ try{lastPdf=buildPdf();lastPdf.save(lastName);}catch(err){msg.textContent="Er ging iets mis bij het maken van de PDF. Probeer een andere browser.";return;}
  document.getElementById("fname").textContent=lastName;
+ try{if(navigator.canShare&&navigator.canShare({files:[pdfFile()]}))document.getElementById("share").classList.remove("hidden")}catch(x){}
  form.classList.add("hidden");document.querySelector(".progress").classList.add("hidden");
  var d=document.getElementById("done");d.classList.remove("hidden");d.scrollIntoView({behavior:"smooth"});
 });
 document.getElementById("again").addEventListener("click",function(){if(lastPdf)lastPdf.save(lastName)});
+function pdfFile(){return new File([lastPdf.output("blob")],lastName,{type:"application/pdf"})}
+document.getElementById("share").addEventListener("click",function(){
+ if(!lastPdf)return;
+ navigator.share({files:[pdfFile()],title:"ADHD-vragenlijst",text:"Mijn ingevulde vragenlijst van ADHDPunt"}).catch(function(){});
+});
 })();
 </script>
 </body>
